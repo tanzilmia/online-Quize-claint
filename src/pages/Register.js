@@ -7,9 +7,10 @@ import { mycontext } from '../contextApi/Authcontext';
 const Register = () => {
     const { register, handleSubmit,formState: { errors },} = useForm();
     const [signUpError, setSignUPError] = useState('')
-    const {signup,updateuser} = useContext(mycontext)
+    const {signup,updateuser,} = useContext(mycontext)
     const neviget = useNavigate()
     const handleSignup = (data) => {
+       
         setSignUPError('');
         const email = data.email;
         const password = data.password;

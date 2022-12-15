@@ -9,8 +9,8 @@ const Login = () => {
     const [loginError, setLoginError] = useState(''); 
     const {login} = useContext(mycontext)
     const negivet = useNavigate()
-    // const location = useLocation();
-    // const from = location.state?.from?.pathname || '/';
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
  
     const handlLogin = data => {
@@ -22,7 +22,7 @@ const Login = () => {
         .then(result => {
             const user = result.user;
             console.log(user)
-            negivet('/quize')
+            negivet(from, { replace: true });
         })
         .catch(error => console.log(error))
        
