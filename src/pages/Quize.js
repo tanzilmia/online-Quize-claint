@@ -38,7 +38,7 @@ function Quize() {
       score,
       wrongAns,
     };
-    fetch(`http://localhost:5000/userifno?email=${user?.email}&date=${date}`, {
+    fetch(`http://localhost:5000/userifno?email=${user?.email}&date=${date}`,{
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -60,13 +60,13 @@ function Quize() {
     if (option === answer) {
       setscore(score + 1);
       fetch(
-        `http://localhost:5000/userifno-correctans?email=${user?.email}&date=${date}`,
+        `http://localhost:5000/correctans?email=${user?.email}&date=${date}`,
         {
           method: "PUT",
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify({ score }),
+          body: JSON.stringify({score}),
         }
       )
         .then((res) => res.json())
@@ -77,7 +77,7 @@ function Quize() {
             headers: {
               "content-type": "application/json",
             },
-            body: JSON.stringify({ score }),
+            body: JSON.stringify({score})
           })
             .then((res) => res.json())
             .then((result) => {
@@ -88,7 +88,7 @@ function Quize() {
     if (option !== answer) {
       setwrongAns(wrongAns + 1);
       fetch(
-        `http://localhost:5000/userifno-incurrentquestion?email=${user?.email}&date=${date}`,
+        `http://localhost:5000/incurrentquestion?email=${user?.email}&date=${date}`,
         {
           method: "PUT",
           headers: {
@@ -118,7 +118,7 @@ function Quize() {
       console.log(`wrong answer ${option}`);
     }
     fetch(
-      `http://localhost:5000/userifno-currentquestion?email=${user?.email}&date=${date}`,
+      `http://localhost:5000/currentquestion?email=${user?.email}&date=${date}`,
       {
         method: "PUT",
         headers: {
