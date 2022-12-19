@@ -1,0 +1,32 @@
+.main_div{
+    width: 600px;
+    height: 500px;
+    background: rgb(89, 240, 204);
+    border: 5px solid rgb(239, 236, 230);
+    margin: 0 auto;
+    padding: 10px;
+}
+.option,.loadQuizee{
+    background: rgb(113, 131, 248);
+    padding: 10px 20px;
+    width: 250px;
+    color: #fff;
+    border-radius: 10px;
+    margin-left: 150px;
+    
+}
+.loadQuizee{
+    background: rgb(55, 56, 74);
+}
+.option:hover{
+    background: rgb(23, 222, 9);
+}
+.question{
+    font-size: 20px;
+    color: rgb(77, 76, 80);
+    text-align: center;
+    font-weight: bold;
+}
+.quizesubmite{
+    text-align: center;
+}

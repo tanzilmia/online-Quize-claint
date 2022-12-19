@@ -8,6 +8,7 @@ const Mainpage = () => {
         <div>
             <Navbar/>
             <Outlet></Outlet>
+           
         </div>
     );
 };
