@@ -57,7 +57,7 @@ const Login = () => {
                     {loginError && <p className='text-red-600'>{loginError}</p>}
                 </div>
             </form>
-            <p>New to ICM ? <Link className='text-secondary' to="/register">Create new Account</Link></p>
+            <p>New to This Site ? <Link className='text-secondary' to="/register">Create new Account</Link></p>
             
         </div>
     </div>

@@ -17,7 +17,7 @@ const Register = () => {
     const password = data.password;
     const name = data.name;
     console.log(name);
-
+// signup---
     signup(email, password)
       .then((result) => {
         const user = result.user;
@@ -26,14 +26,7 @@ const Register = () => {
           displayName: name,
         };
 
-        const storeuserinfoInDB = {
-          name,
-          email,
-          totalpoint: 0,
-          totalQuize: 0,
-          totalWrong: 0,
-        };
-
+    //  update users
         updateuser(userName)
           .then((result) => {
             logout()
