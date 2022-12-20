@@ -141,9 +141,10 @@ function Quize() {
           
           <div className="text-center mt-[150px]">
             {" "}
+            <h2 className="text-2xl">{date}</h2>
             <h3><span>Today Quize is Finished , You Can't Answer More Today <br /> But Tomorrow You Can ..</span></h3>
             <h1 className="text-2xl"> correct ans : {userdata?.score} wrong ans : {userdata?.wrongAns} </h1>{" "}
-    
+     
             <Link className="btn btn-primary my-5" to = '/profile'>Click To Visite Profile</Link>
           </div>
         </>
