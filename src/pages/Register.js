@@ -41,17 +41,6 @@ const Register = () => {
                 neviget('/login')
               })
               .catch(() => {});
-            fetch(`http://localhost:5000/storeuser`, {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(storeuserinfoInDB),
-            })
-              .then((res) => res.json())
-              .then((result) => {
-                console.log(result);
-              });
           })
           .catch((error) => console.log(error));
       })

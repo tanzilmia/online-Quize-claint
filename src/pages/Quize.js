@@ -72,17 +72,6 @@ function Quize() {
         .then((res) => res.json())
         .then((result) => {
           console.log(result);
-          fetch(`http://localhost:5000/totalcorrectans?email=${user?.email}`, {
-            method: "PUT",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({score})
-          })
-            .then((res) => res.json())
-            .then((result) => {
-              console.log(result);
-            });
         });
     }
     if (option !== answer) {
@@ -100,20 +89,7 @@ function Quize() {
         .then((res) => res.json())
         .then((result) => {
           // update total wrong answer
-          fetch(
-            `http://localhost:5000/totalincorrect?email=${user?.email}`,
-            {
-              method: "PUT",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify({ wrongAns }),
-            }
-          )
-            .then((res) => res.json())
-            .then((result) => {
-              console.log(result);
-            });
+         
         });
       console.log(`wrong answer ${option}`);
     }
@@ -130,21 +106,6 @@ function Quize() {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-
-        fetch(
-          `http://localhost:5000/total-question?email=${user?.email}`,
-          {
-            method: "PUT",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({ currentQuestion }),
-          }
-        )
-          .then((res) => res.json())
-          .then((result) => {
-            console.log(result);
-          });
       });
     setcurrentQuestion(currentQuestion + 1);
   };
@@ -165,13 +126,13 @@ function Quize() {
         <button
           className="loadQuizee"
           onClick={loadDataFormDb}
-          disabled={userdata?.currentQuestion >= 3}
+          disabled={userdata?.currentQuestion >= 50}
         >
           Get Today Quize
         </button>{" "}
       </div>
 
-      {userdata?.currentQuestion >= 3 ? (
+      {userdata?.currentQuestion >= 50 ? (
         <>
           <h2> Task Complete ! Relode Next Day For New Quize </h2>
           <div>
