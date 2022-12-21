@@ -1,15 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { mycontext } from "../contextApi/Authcontext";
-
+import '../styles/style.css'
 const Profile = () => {
   const { user } = useContext(mycontext);
+
 
   const { data: lifetimeinfo = [], refetch } = useQuery({
     queryKey: ["storeuser", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/totalinfo?email=${user?.email}`
+        `https://server-tanzilmia.vercel.app/totalinfo?email=${user?.email}`
       );
       const data = await res.json();
       return data;
@@ -41,9 +43,9 @@ const Profile = () => {
   return (
     <div>
      {
-      lifetimeinfo.length > 0 && 
+      lifetimeinfo.length > 0 ?
       <>
-       <div>
+       <div className="total_info">
       <h2> Total day : {lifetimeinfo.length}</h2>
       <h2> Total right Answer {totalscore} </h2>
       <h2> Total wrong {totalwrong} </h2>
@@ -75,6 +77,15 @@ const Profile = () => {
           </tbody>
         </table>
       </div>
+      </>
+      :
+      <>
+      
+      <div className="text-center">
+      <h2 className="text-2xl text-primary"> Currectly You Haven't Give Any Quize </h2>
+      <Link className="btn btn-primary my-5" to = '/quize'>Start Quize</Link>
+      </div>
+
       </>
      }
     </div>

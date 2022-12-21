@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment/moment";
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { mycontext } from "../contextApi/Authcontext";
 import "../styles/style.css";
 function Quize() {
@@ -18,7 +19,7 @@ function Quize() {
   const { data: registeruser = {}, refetch } = useQuery({
     queryKey: ["storeuser", email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/storeuser?email=${email}`);
+      const res = await fetch(`https://server-tanzilmia.vercel.app/storeuser?email=${email}`);
       const data = await res.json();
       return data;
     },
@@ -38,7 +39,7 @@ function Quize() {
       score,
       wrongAns,
     };
-    fetch(`http://localhost:5000/userifno?email=${user?.email}&date=${date}`,{
+    fetch(`https://server-tanzilmia.vercel.app/userifno?email=${user?.email}&date=${date}`,{
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -50,7 +51,7 @@ function Quize() {
         console.log(result);
       });
 
-    fetch(`http://localhost:5000/quize?email=${user?.email}&date=${date}`)
+    fetch(`https://server-tanzilmia.vercel.app/quize?email=${user?.email}&date=${date}`)
       .then((res) => res.json())
       .then((data) => setqueges(data));
   };
@@ -60,7 +61,7 @@ function Quize() {
     if (option === answer) {
       setscore(score + 1);
       fetch(
-        `http://localhost:5000/correctans?email=${user?.email}&date=${date}`,
+        `https://server-tanzilmia.vercel.app/correctans?email=${user?.email}&date=${date}`,
         {
           method: "PUT",
           headers: {
@@ -77,7 +78,7 @@ function Quize() {
     if (option !== answer) {
       setwrongAns(wrongAns + 1);
       fetch(
-        `http://localhost:5000/incurrentquestion?email=${user?.email}&date=${date}`,
+        `https://server-tanzilmia.vercel.app/incurrentquestion?email=${user?.email}&date=${date}`,
         {
           method: "PUT",
           headers: {
@@ -94,7 +95,7 @@ function Quize() {
       console.log(`wrong answer ${option}`);
     }
     fetch(
-      `http://localhost:5000/currentquestion?email=${user?.email}&date=${date}`,
+      `https://server-tanzilmia.vercel.app/currentquestion?email=${user?.email}&date=${date}`,
       {
         method: "PUT",
         headers: {
@@ -110,7 +111,7 @@ function Quize() {
     setcurrentQuestion(currentQuestion + 1);
   };
   useEffect(() => {
-    fetch(`http://localhost:5000/userinfo?email=${user?.email}&date=${date}`)
+    fetch(`https://server-tanzilmia.vercel.app/userinfo?email=${user?.email}&date=${date}`)
       .then((res) => res.json())
       .then((data) => setuserdata(data));
   }, [user?.email, date, currentQuestion]);
@@ -127,18 +128,23 @@ function Quize() {
           className="loadQuizee"
           onClick={loadDataFormDb}
           disabled={userdata?.currentQuestion >= 50}
+          
         >
-          Get Today Quize
+          {`${userdata?.currentQuestion >= 50  ? 'Task Complete' : 'Get Today Quize'}`}
+          
+          
         </button>{" "}
       </div>
 
       {userdata?.currentQuestion >= 50 ? (
         <>
-          <h2> Task Complete ! Relode Next Day For New Quize </h2>
-          <div>
+          
+          <div className="text-center mt-[150px]">
             {" "}
-            <span> correct ans : {userdata?.score} </span>{" "}
-            <span> wrong ans : {userdata?.wrongAns} </span>{" "}
+            <h3><span>Today Quize is Finished , You Can't Answer More Today <br /> But Tomorrow You Can ..</span></h3>
+            <h1 className="text-2xl"> correct ans : {userdata?.score} wrong ans : {userdata?.wrongAns} </h1>{" "}
+    
+            <Link className="btn btn-primary my-5" to = '/profile'>Click To Visite Profile</Link>
           </div>
         </>
       ) : (
@@ -146,7 +152,7 @@ function Quize() {
           {queges.length ? (
             <>
               <h2 className="quizesubmite">
-                Quize {currentQuestion} / {queges.length}
+                Quize {currentQuestion} / 50
               </h2>
             </>
           ) : (
