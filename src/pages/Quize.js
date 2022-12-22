@@ -61,7 +61,7 @@ function Quize() {
       .then((data) => setqueges(data));
   };
 
-  const answer = queges[currentQuestion]?.correct_answer;
+  const answer = queges[indexs]?.correct_answer;
   const getAnswer = (option) => {
     if (option === answer) {
       setscore(score + 1);
@@ -114,6 +114,8 @@ function Quize() {
         refetch()
       });
   };
+
+  refetch()
 
 
   if (loading) {
