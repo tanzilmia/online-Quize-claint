@@ -27,7 +27,7 @@ function Quize() {
   // dstructure all stored data
 
   const {currentQuestion:totalanswer, score:correct, wrongAns:wrong} = userdata
-
+  let indexs = userdata?.currentQuestion > 0 ? userdata?.currentQuestion : 0 
 
   console.log(date);
   console.log(userdata);
@@ -172,9 +172,9 @@ function Quize() {
             </>
           )}
           <div>
-            <h2 className="question">{queges[currentQuestion]?.question}</h2>
+            <h2 className="question">{queges[indexs]?.question}</h2>
             <ul>
-              {queges[currentQuestion]?.options?.map((option, _id) => (
+              {queges[indexs]?.options?.map((option, _id) => (
                 <>
                   <br />
                   <li>
