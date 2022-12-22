@@ -6,10 +6,12 @@ import Quize from "../pages/Quize";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import PrivetRouting from "./PrivetRouting";
+import Error from "../pages/Error";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Mainpage></Mainpage>,
+    errorElement : <Error></Error>,
     children: [
       {
         path: "/", element: <Home />,
