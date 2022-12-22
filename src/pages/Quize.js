@@ -98,7 +98,6 @@ function Quize() {
           // update total wrong answer
           refetch()
         });
-      console.log(`wrong answer ${option}`);
     }
     fetch(
       `https://server-five-gold.vercel.app/currentquestion?email=${user?.email}&date=${date}`,
@@ -114,7 +113,6 @@ function Quize() {
       .then((result) => {
         refetch()
       });
-    setcurrentQuestion(currentQuestion + 1);
   };
 
 
