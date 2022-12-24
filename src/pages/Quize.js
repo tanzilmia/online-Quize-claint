@@ -1,6 +1,7 @@
+
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment/moment";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { mycontext } from "../contextApi/Authcontext";
 import "../styles/style.css";
@@ -8,27 +9,27 @@ function Quize() {
   const [queges, setqueges] = useState([]);
   const { user, loading } = useContext(mycontext);
   const date = moment().format("MMM Do YY");
-  const [userdata, setuserdata] = useState({});
   const [currentQuestion, setcurrentQuestion] = useState(0);
   const [score, setscore] = useState(0);
   const [wrongAns, setwrongAns] = useState(0);
   const email = user?.email;
   const name = user?.displayName;
+// get storeuser info
+  const {data:userdata = {}, refetch} = useQuery({
+    queryKey : ['userinfo'],
+    queryFn : async ()=>{
+      const res = await fetch(`https://server-five-gold.vercel.app/userinfo?email=${user?.email}&date=${date}`)
+      const data = await res.json()
+      return data
+    }
+  })
+
+  // dstructure all stored data
+
+  const {currentQuestion:totalanswer, score:correct, wrongAns:wrong} = userdata
+
+
   console.log(date);
-
-  const { data: registeruser = {}, refetch } = useQuery({
-    queryKey: ["storeuser", email],
-    queryFn: async () => {
-      const res = await fetch(`https://server-tanzilmia.vercel.app/storeuser?email=${email}`);
-      const data = await res.json();
-      return data;
-    },
-  });
-
-  console.log(registeruser);
-
-  refetch();
-
   console.log(userdata);
   const loadDataFormDb = () => {
     const userinfo = {
@@ -39,19 +40,23 @@ function Quize() {
       score,
       wrongAns,
     };
-    fetch(`https://server-tanzilmia.vercel.app/userifno?email=${user?.email}&date=${date}`,{
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(userinfo),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-      });
-
-    fetch(`https://server-tanzilmia.vercel.app/quize?email=${user?.email}&date=${date}`)
+    if (date !== userdata?.date) {
+      fetch(
+        `https://server-five-gold.vercel.app/userifno?email=${user?.email}&date=${date}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userinfo),
+        }
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+        });
+    }
+    fetch(`https://server-five-gold.vercel.app/quize?email=${user?.email}&date=${date}`)
       .then((res) => res.json())
       .then((data) => setqueges(data));
   };
@@ -61,60 +66,57 @@ function Quize() {
     if (option === answer) {
       setscore(score + 1);
       fetch(
-        `https://server-tanzilmia.vercel.app/correctans?email=${user?.email}&date=${date}`,
+        `https://server-five-gold.vercel.app/correctans?email=${user?.email}&date=${date}`,
         {
           method: "PUT",
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify({score}),
+          body: JSON.stringify({correct}),
         }
       )
         .then((res) => res.json())
         .then((result) => {
           console.log(result);
+          refetch()
         });
     }
     if (option !== answer) {
       setwrongAns(wrongAns + 1);
       fetch(
-        `https://server-tanzilmia.vercel.app/incurrentquestion?email=${user?.email}&date=${date}`,
+        `https://server-five-gold.vercel.app/incurrentquestion?email=${user?.email}&date=${date}`,
         {
           method: "PUT",
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify({ wrongAns }),
+          body: JSON.stringify({ wrong }),
         }
       )
         .then((res) => res.json())
         .then((result) => {
           // update total wrong answer
-         
+          refetch()
         });
       console.log(`wrong answer ${option}`);
     }
     fetch(
-      `https://server-tanzilmia.vercel.app/currentquestion?email=${user?.email}&date=${date}`,
+      `https://server-five-gold.vercel.app/currentquestion?email=${user?.email}&date=${date}`,
       {
         method: "PUT",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ currentQuestion }),
+        body: JSON.stringify({totalanswer}),
       }
     )
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        refetch()
       });
     setcurrentQuestion(currentQuestion + 1);
   };
-  useEffect(() => {
-    fetch(`https://server-tanzilmia.vercel.app/userinfo?email=${user?.email}&date=${date}`)
-      .then((res) => res.json())
-      .then((data) => setuserdata(data));
-  }, [user?.email, date, currentQuestion]);
+
 
   if (loading) {
     return <p>Lorem ...</p>;
@@ -128,37 +130,45 @@ function Quize() {
           className="loadQuizee"
           onClick={loadDataFormDb}
           disabled={userdata?.currentQuestion >= 50}
-          
         >
-          {`${userdata?.currentQuestion >= 50  ? 'Task Complete' : 'Get Today Quize'}`}
-          
-          
+          {`${
+            userdata?.currentQuestion >= 50 ? "Task Complete" : "Get Today Quize"
+          }`}
         </button>{" "}
+         
+         
       </div>
 
       {userdata?.currentQuestion >= 50 ? (
         <>
-          
           <div className="text-center mt-[150px]">
             {" "}
             <h2 className="text-2xl">{date}</h2>
-            <h3><span>Today Quize is Finished , You Can't Answer More Today <br /> But Tomorrow You Can ..</span></h3>
-            <h1 className="text-2xl"> correct ans : {userdata?.score} wrong ans : {userdata?.wrongAns} </h1>{" "}
-     
-            <Link className="btn btn-primary my-5" to = '/profile'>Click To Visite Profile</Link>
+            <h3>
+              <span>
+                Today Quize is Finished , You Can't Answer More Today <br /> But
+                Tomorrow You Can ..
+              </span>
+            </h3>
+            <h1 className="text-2xl">
+              {" "}
+              correct ans : {userdata?.score} wrong ans : {userdata?.wrongAns}{" "}
+            </h1>{" "}
+            <Link className="btn btn-primary my-5" to="/profile">
+              Click To Visite Profile
+            </Link>
           </div>
         </>
       ) : (
         <>
           {queges.length ? (
             <>
-              <h2 className="quizesubmite">
-                Quize {currentQuestion} / 50
-              </h2>
+              <h2 className="quizesubmite">Quize {userdata?.currentQuestion} / 50 Quize Left</h2>
             </>
           ) : (
             <>
-              <h2 className="quizesubmite"> No Data </h2>
+              <h2 className="quizesubmite"> EveryDay You Can Sumbmit 50 Quize Answer  </h2>
+              <h2 className="quizesubmite"> {`You Submit ${userdata?.currentQuestion > 0 ? userdata?.currentQuestion : 0 } Answer `} </h2>
             </>
           )}
           <div>

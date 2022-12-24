@@ -6,12 +6,13 @@ import '../styles/style.css'
 const Profile = () => {
   const { user } = useContext(mycontext);
 
+  // get total datewaize info
 
   const { data: lifetimeinfo = [], refetch } = useQuery({
     queryKey: ["storeuser", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `https://server-tanzilmia.vercel.app/totalinfo?email=${user?.email}`
+        `https://server-five-gold.vercel.app/totalinfo?email=${user?.email}`
       );
       const data = await res.json();
       return data;
