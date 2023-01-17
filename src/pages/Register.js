@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { mycontext } from "../contextApi/Authcontext";
+
 const Register = () => {
   const {
     register,
@@ -9,35 +9,32 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const [signUpError, setSignUPError] = useState("");
-  const { signup, updateuser, logout } = useContext(mycontext);
   const neviget = useNavigate();
+
   const handleSignup = (data) => {
     setSignUPError("");
+    const name = data.name;
     const email = data.email;
     const password = data.password;
-    const name = data.name;
-    console.log(name);
-// signup---
-    signup(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        const userName = {
-          displayName: name,
-        };
+    fetch(`http://localhost:5000/register`,{
+      method: 'POST',
+      headers: {
+        "content-type" : "application/json"
+      },
+      body : JSON.stringify({name, email, password})
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      
+    })
+
+
+
+
 
     //  update users
-        updateuser(userName)
-          .then((result) => {
-            logout()
-              .then(() => {
-                neviget('/login')
-              })
-              .catch(() => {});
-          })
-          .catch((error) => console.log(error));
-      })
-      .catch((error) => console.log(error));
+        
   };
 
   return (
@@ -90,12 +87,8 @@ const Register = () => {
                 minLength: {
                   value: 6,
                   message: "Password must be 6 characters long",
-                },
-                pattern: {
-                  value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
-                  message:
-                    "Password must have uppercase, number and special characters",
-                },
+                }
+  
               })}
               className="input input-bordered w-full max-w-xs"
             />

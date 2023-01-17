@@ -1,17 +1,13 @@
+
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { mycontext } from '../contextApi/Authcontext';
-
 const Navbar = () => {
-  const {user,logout} = useContext(mycontext)
-
+  const {user} = useContext(mycontext)
   const handlelogout = () =>{
-    logout()
-    .then(()=>{
-      
-    })
-    .catch(()=>{})
+   localStorage.clear()
   }
+  
   return (
     <div className="navbar bg-base-100">
   <div className="flex-1">
