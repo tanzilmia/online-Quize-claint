@@ -3,9 +3,9 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { mycontext } from '../contextApi/Authcontext';
 const Navbar = () => {
-  const {user} = useContext(mycontext)
+  const {user,logout} = useContext(mycontext)
   const handlelogout = () =>{
-   localStorage.clear()
+    logout()
   }
   
   return (

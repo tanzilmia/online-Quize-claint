@@ -1,10 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { mycontext } from "../contextApi/Authcontext";
 
 const Login = () => {
+  const {setIsLoggedIn} = useContext(mycontext)
   const {
     register,
     handleSubmit,
@@ -33,6 +34,7 @@ const Login = () => {
             localStorage.setItem("token", data.data)
             // neviget anywhere form here 
             console.log(data);
+            setIsLoggedIn(true)
             neviget('/')
            
 
