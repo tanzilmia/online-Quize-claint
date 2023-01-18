@@ -6,6 +6,7 @@ const Authcontext = ({ children }) => {
   const [user, setuser] = useState({});
   const [loading, setloading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isRefreshed, setIsRefreshed] = useState(false);
 
   const token = localStorage.getItem("token");
 
@@ -33,7 +34,10 @@ const Authcontext = ({ children }) => {
 
   const logout = () =>{
       localStorage.clear()
-      isLoggedIn(false)
+      setIsRefreshed(true);
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 100);
   }
   
 
