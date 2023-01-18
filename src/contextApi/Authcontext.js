@@ -7,11 +7,8 @@ const Authcontext = ({ children }) => {
   const [loading, setloading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRefreshed, setIsRefreshed] = useState(false);
-
+  
   const token = localStorage.getItem("token");
-
-
-
   useEffect(() => {
     if(token || isLoggedIn){
       fetch(`http://localhost:5000/userData`, {
