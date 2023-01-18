@@ -1,0 +1,13 @@
+.main_layout{
+
+}
+.navbar_wrapper{
+ height: 100vh;
+ padding: 20px;
+ color: #fff;
+ background: linear-gradient(#0e0242, #484b6c);
+}
+
+.outlet{
+ margin-left: 10px;
+}
