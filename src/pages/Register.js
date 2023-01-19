@@ -26,6 +26,9 @@ const Register = () => {
     .then(res => res.json())
     .then(data => {
       console.log(data)
+      if(data.message === "Successfully Registered"){
+        neviget('/login')
+      }
       
     })
 

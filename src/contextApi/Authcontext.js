@@ -23,7 +23,11 @@ const Authcontext = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         setuser(data.data)
-        console.log(data)
+        console.log(data.data)
+        if(data.data){
+          console.log('inside if');
+          setloading(false)
+        }
         
       });
     }

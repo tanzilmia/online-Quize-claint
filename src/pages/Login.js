@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { mycontext } from "../contextApi/Authcontext";
 
 const Login = () => {
-  const {setIsLoggedIn} = useContext(mycontext)
+  const {setIsLoggedIn,} = useContext(mycontext)
   const {
     register,
     handleSubmit,
@@ -13,7 +13,7 @@ const Login = () => {
   } = useForm();
   const [loginError, setLoginError] = useState("");
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const fromm = location.state?.from?.pathname || "/";
  const neviget = useNavigate()
   const handlLogin = (data) => {
     
@@ -29,15 +29,22 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         if(data.message === "Successfull"){
             // storing the token
             localStorage.setItem("token", data.data)
             // neviget anywhere form here 
             console.log(data);
             setIsLoggedIn(true)
-            neviget('/')
+            neviget(fromm, {replace:true})
            
 
+        }
+        if(data.message === "User not registered"){
+          setLoginError("worning User Not Register")
+        }
+        if(data.message === "Password didn't match"){
+          setLoginError("worning Password didn't match")
         }
       });
   };
