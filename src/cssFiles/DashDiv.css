@@ -36,6 +36,16 @@
     border-radius: 25px;
     
 }
+.start_quize{
+    text-decoration: none;
+    background: rgb(18, 179, 219);
+    padding: 10px 25px;
+    color: #fff;
+    margin-left: 120px;
+    font-size: 18px;
+    border-radius: 25px;
+    
+}
 .main_page{
     background: rgb(218, 246, 254);
 }

@@ -33,19 +33,9 @@ const Navbar = () => {
       <hr className='border_line' />
       <li> <Link to = '/'> <span className='mr-4'> <AiFillHome/> </span> Home</Link> </li>
       {
-         user?.role === "admin" ? <>
+         user?.role === "admin" &&
          <li> <Link to = '/dashboard'> <span className='mr-4'> <RxDashboard/> </span> Dashboard</Link> </li>
-         </>
-         :
-         <>
-          
-          <li> <Link to = '/quize'> <span className='mr-4'> <GiBrain/> </span>  Quize</Link> </li>
-         </>
       }
-      
-       
-      
-      
       
       {
         !user?.email ? <>
@@ -53,6 +43,7 @@ const Navbar = () => {
         </>
         :
         <>
+        <li> <Link to = '/quize'> <span className='mr-4'> <GiBrain/> </span>  Quize</Link> </li>
         <button className='logout_btn flex items-center' onClick={handlelogout}><span className='mr-4'> <RiLoginCircleLine/></span> Logout  </button>
         </>
       }
