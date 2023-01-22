@@ -39,3 +39,24 @@
 .main_page{
     background: rgb(218, 246, 254);
 }
+.add_quize_inputdiv input{
+    padding: 15px;
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    outline: none;
+    margin-left: 90px;
+    margin-top: 25px;
+    
+}
+.add_quize_inputdiv input::placeholder{
+    color: #fff;
+}
+.addbtn{
+   margin-left: 120px;
+   background: green;
+   padding: 10px 25px;
+   margin-top: 15px;
+   color: #fff;
+   border-radius: 5px;
+}

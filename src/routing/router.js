@@ -10,6 +10,7 @@ import AdminRouting from "./AdminRouting";
 import AddQuize from "../AdminPanel/AddQuize";
 import UserInfo from "../AdminPanel/UserInfo";
 import UserHistory from "../AdminPanel/UserHistory";
+import QuizeSetting from "../AdminPanel/QuizeSetting";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRouting>
             <UserHistory />
+          </AdminRouting>
+        ),
+      },
+      {
+        path: "/dashboard/settings",
+        element: (
+          <AdminRouting>
+           <QuizeSetting/>
           </AdminRouting>
         ),
       },

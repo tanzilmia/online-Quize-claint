@@ -1,14 +1,22 @@
+
 import React, { useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { mycontext } from "../contextApi/Authcontext";
 import '../cssFiles/AddQuize.css'
 const AddQuize = () => {
+  const {categoryObject} = useContext(mycontext);
+  const [quizeError, setquizeError] = useState("");
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset
       } = useForm();
 
-      const [quizeError, setquizeError] = useState("");
+ 
+      const {categoryOptions} = categoryObject
+     
 
       const handleAddQuize = (data) =>{
         setquizeError("")
@@ -46,13 +54,13 @@ const AddQuize = () => {
             }
             if(data.message === "successfull"){
                 alert("Quize add successfull")
+                reset()
             }
         })
       }catch(error){
         console.log(error)
       }
       }
-
 
 
   return (
@@ -101,12 +109,14 @@ const AddQuize = () => {
            
             <div className="select_categorys">
                
-               <select name="select categorys"  {...register("categoryName", {
+               <select placeholder="chose category" name="select categorys"  {...register("categoryName", {
                 required: "Name is Required",
               })} id="">
-                   <option value="insert Quize">Insert Quize</option>
-                   <option value="2">2</option>
-                   <option value="3">3</option>
+                   
+                   
+                   { categoryOptions.length &&
+                    categoryOptions?.map(options =><option value={options.categoryName}>{options.categoryName}</option>)
+                   }
                </select>
            </div>
             </div>

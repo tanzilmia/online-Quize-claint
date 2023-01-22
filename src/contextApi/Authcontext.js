@@ -1,4 +1,5 @@
 
+import { useQuery } from "@tanstack/react-query";
 import React, { createContext, useEffect, useState } from "react";
 export const mycontext = createContext();
 
@@ -7,6 +8,24 @@ const Authcontext = ({ children }) => {
   const [loading, setloading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRefreshed, setIsRefreshed] = useState(false);
+
+
+
+  const {data:categorys=[]} = useQuery({
+    queryKey:["allCategorys"],
+    queryFn: async ()=>{
+      const res = await fetch(`http://localhost:5000/allCategorys`)
+      const data = await res.json()
+      return data
+
+    }
+  })
+
+ const categoryOptions = categorys.data
+ const categoryObject = {
+      categoryOptions
+ }
+
   
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -42,7 +61,7 @@ const Authcontext = ({ children }) => {
   }
   
 
-  const contextValue = { loading, user,setIsLoggedIn,logout};
+  const contextValue = { loading, user,setIsLoggedIn,logout,categoryObject};
   return (
     <mycontext.Provider value={contextValue}>{children}</mycontext.Provider>
   );
