@@ -6,40 +6,42 @@ const PlayQuize = () => {
   const [currentQuestion, setcurrentQuestion] = useState(0);
   const [stop, setStop] = useState(false);
   const time = 10
-  const [remainingTime, setRemainingTime] = useState(3);
+  const [remainingTime, setRemainingTime] = useState(15);
   const quizeData = useLoaderData();
 
   console.log(quizeData);
   const quizes = quizeData?.data;
   const answer = quizes[currentQuestion]?.correctAnswer;
 
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//         if (remainingTime === 0) {
-//             // call function to stop quiz
-//             setRemainingTime(4)
-//             setcurrentQuestion(currentQuestion + 1);
+  useEffect(() => {
+    if(currentQuestion <= 2){
+      const interval = setInterval(() => {
+        if (remainingTime === 0) {
+            // call function to stop quiz
+            setRemainingTime(15)
+            setcurrentQuestion(currentQuestion + 1);
              
-//             return;
-//           }
-//           setRemainingTime(remainingTime - 1);
+            return;
+          }
+          setRemainingTime(remainingTime - 1);
           
-//     }, 1000);
+    }, 1000);
     
-//     if (stop)
-//     return () => clearInterval(interval);
-    
-//   }, [remainingTime,currentQuestion,stop]);
+    return () => clearInterval(interval);
+    }
+  }, [remainingTime,currentQuestion]);
 
   // quize answer gettting
   const submitQuize = (option) => {
     if (option === answer) {
       alert("right answer");
       setcurrentQuestion(currentQuestion + 1);
+      setRemainingTime(15)
     }
     if (option !== answer) {
       alert("wrong answer");
       setcurrentQuestion(currentQuestion + 1);
+      setRemainingTime(15)
     }
   };
 
