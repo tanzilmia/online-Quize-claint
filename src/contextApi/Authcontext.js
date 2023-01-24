@@ -8,7 +8,23 @@ const Authcontext = ({ children }) => {
   const [loading, setloading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRefreshed, setIsRefreshed] = useState(false);
+  
 
+  const {data:settings={}} = useQuery({
+    queryKey:['settings'],
+    queryFn : async ()=>{
+      const res = await fetch(`http://localhost:5000/settings`)
+      const data = await res.json()
+      return data
+    }
+  })
+
+  console.log(settings.data)
+
+   
+  const settingsData = {
+    settings : settings.data
+  }
 
 
   const {data:categorys=[]} = useQuery({
@@ -61,7 +77,7 @@ const Authcontext = ({ children }) => {
   }
   
 
-  const contextValue = { loading, user,setIsLoggedIn,logout,categoryObject};
+  const contextValue = { loading, user,setIsLoggedIn,logout,categoryObject,settingsData};
   return (
     <mycontext.Provider value={contextValue}>{children}</mycontext.Provider>
   );

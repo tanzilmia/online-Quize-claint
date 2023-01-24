@@ -1,56 +1,120 @@
+
+
+import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useContext } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { mycontext } from "../contextApi/Authcontext";
 import '../cssFiles/PlayQuize.css'
 const PlayQuize = () => {
-  const [currentQuize, setcurrentQuize] = useState(0);
+  const {user,loading} = useContext(mycontext);
+  const email = user?.email;
+  const {settingsData} = useContext(mycontext);
+   const [{dayliQuize,timer}] = settingsData.settings;
+   const [dailyUserInfo, setdailyUserInfo] = useState({})
+   const {currentQuestion:dbCurrentQuestion,score:databegScore,rightAns,wrongAns} = dailyUserInfo;
+   const date = moment().format("MMM Do YY");
+   const neviget = useNavigate()
+  const [wrong, setwrong] = useState(0);
+  const [rigthAns, setrigthAns] = useState(0);
+  const [score, setscore] = useState(0);
+   
   const [currentQuestion, setcurrentQuestion] = useState(0);
-  const [stop, setStop] = useState(false);
-  const time = 10
-  const [remainingTime, setRemainingTime] = useState(15);
+// dstructure quize general settings
+  const [remainingTime, setRemainingTime] = useState(timer);
   const quizeData = useLoaderData();
-
-  console.log(quizeData);
   const quizes = quizeData?.data;
   const answer = quizes[currentQuestion]?.correctAnswer;
+  const categoryName = quizes[currentQuestion]?.categoryName;
 
-  useEffect(() => {
-    if(currentQuestion <= 2){
-      const interval = setInterval(() => {
-        if (remainingTime === 0) {
-            // call function to stop quiz
-            setRemainingTime(15)
-            setcurrentQuestion(currentQuestion + 1);
-             
-            return;
-          }
-          setRemainingTime(remainingTime - 1);
-          
-    }, 1000);
-    
-    return () => clearInterval(interval);
-    }
-  }, [remainingTime,currentQuestion]);
-
+  try{
+    useEffect(() => {
+      if(dbCurrentQuestion <= dayliQuize){
+        const interval = setInterval(() => {
+          if (remainingTime === 0) {
+              // call function to stop quiz
+              setRemainingTime(timer)
+              setcurrentQuestion(currentQuestion + 1);
+              setwrong(wrong+1)
+              setscore(score-2)
+              if(dbCurrentQuestion !==dayliQuize){
+                try{
+                  fetch(
+                    `http://localhost:5000/auto-submit-quize`,
+                    {
+                      method: "PUT",
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify({wrong,score,categoryName,date,email,currentQuestion,dayliQuize}),
+                    }
+                  )
+                    .then((res) => res.json())
+                    .then((result) => {
+                      console.log(result);
+                      
+                    });
+                }catch(err) {}
+              }
+           
+               
+              return; 
+            }
+            setRemainingTime(remainingTime - 1);
+            
+      }, 1000);
+      
+      return () => clearInterval(interval);
+      }
+     
+    }, [remainingTime,currentQuestion,timer,dayliQuize,wrong,score,categoryName,date,email,dbCurrentQuestion]);
+  }catch(err) {console.log(err)}
+  
   // quize answer gettting
   const submitQuize = (option) => {
     if (option === answer) {
       alert("right answer");
       setcurrentQuestion(currentQuestion + 1);
-      setRemainingTime(15)
+      setRemainingTime(timer)
     }
     if (option !== answer) {
       alert("wrong answer");
       setcurrentQuestion(currentQuestion + 1);
-      setRemainingTime(15)
+      setRemainingTime(timer)
     }
   };
 
+
+  if(currentQuestion <=dayliQuize){
+    try{
+      fetch(`http://localhost:5000/store-daily-quize?email=${user?.email}&date=${date}&categoryName=${categoryName}`)
+      .then(res => res.json())
+      .then(data => {
+        setdailyUserInfo(data.data)
+      })
+     
+    }catch(err) {console.log("Faield store-daily-quize data")}
+  }
+
+  
+
+
+  if(loading){
+    return <p>Loaddings</p>
+   }
+
   return (
-    <div className="w-6/12 mx-auto text-center mt-11">
+    <> { dbCurrentQuestion === dayliQuize ?
+      <>
+      <h2 className="text-center text-2xl">You Finised ToDays Task </h2>
+    </>
+      :
+      <>
+         <div className="w-6/12 mx-auto text-center mt-11">
       <div>Remaining Time: {remainingTime} seconds</div>
-      <h2 className="text-xl text-center">{quizes[currentQuestion]?.title} </h2>
+      <h2 className="text-xl text-center">{quizes[dbCurrentQuestion]?.title} </h2>
       <ul className="Option grid grid-cols-2 gap-2 mt-4">
-        {quizes[currentQuestion]?.quizeOptions?.map((option, _id) => (
+        {quizes[dbCurrentQuestion]?.quizeOptions?.map((option, _id) => (
           <>
             
             
@@ -66,7 +130,13 @@ const PlayQuize = () => {
           </>
         ))}
       </ul>
-    </div>
+        </div>
+      </>
+      
+     
+    }
+   
+    </>
   );
 };
 

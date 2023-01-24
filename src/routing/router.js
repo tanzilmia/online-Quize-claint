@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/quize",
-        element: <PrivetRouting> <Quizes/>  </PrivetRouting>
+        element: <PrivetRouting><Quizes/></PrivetRouting>
       },
       {
         path: "/playQuize/:categoryName",
