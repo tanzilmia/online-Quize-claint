@@ -22,6 +22,7 @@ const CategoryDiv = ({category}) => {
 
     const userData = {
         email : user.email,
+        name:user.name,
         categoryName,
         date,
         currentQuestion,

@@ -11,12 +11,17 @@
     color: blue;
     
 }
+.option{
+    background-color: none;
+}
 
 .option input{
     width: 100%;
     padding: 10px;
     text-align: center;
     border-radius: 10px;
+    color: #000;
+    background-color: none;
 }
 .select_categorys select{
     width: 100%;

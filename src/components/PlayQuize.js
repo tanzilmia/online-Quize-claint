@@ -76,11 +76,51 @@ const PlayQuize = () => {
       alert("right answer");
       setcurrentQuestion(currentQuestion + 1);
       setRemainingTime(timer)
+      setrigthAns(rightAns + 1)
+      setscore(score + 10)
+      try{
+        fetch(
+          `http://localhost:5000/right-quize`,
+          {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({score,categoryName,date,email,currentQuestion,dayliQuize,rigthAns}),
+          }
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            console.log(result);
+            
+          });
+      }catch(err) {}
+
     }
     if (option !== answer) {
       alert("wrong answer");
       setcurrentQuestion(currentQuestion + 1);
       setRemainingTime(timer)
+      setwrong(wrong+1)
+      setscore(score - 10)
+      try{
+        fetch(
+          `http://localhost:5000/wrong-quize`,
+          {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({score,categoryName,date,email,currentQuestion,dayliQuize,wrong}),
+          }
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            console.log(result);
+            
+          });
+      }catch(err) {}
+
     }
   };
 
@@ -106,7 +146,7 @@ const PlayQuize = () => {
   return (
     <> { dbCurrentQuestion === dayliQuize ?
       <>
-      <h2 className="text-center text-2xl">You Finised ToDays Task </h2>
+      <h2 className="text-center text-2xl">You Finised ToDay Task </h2>
     </>
       :
       <>
