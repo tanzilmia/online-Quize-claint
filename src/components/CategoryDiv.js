@@ -7,14 +7,9 @@ import '../cssFiles/DashDiv.css'
 
 
 const CategoryDiv = ({category}) => {
-    const {user,settingsData} = useContext(mycontext);
-    const [{dayliQuize,timer}] = settingsData.settings;
+    const {user} = useContext(mycontext);
     const {categoryName} = category;
     const date = moment().format("MMM Do YY");
-   const [userInfo, setdailyUserInfo] = useState({});
-
-   console.log(categoryName);
-
     const currentQuestion = 0;
     const score = 0;
     const rightAns = 0;

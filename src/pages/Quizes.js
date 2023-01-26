@@ -5,11 +5,8 @@ import { mycontext } from '../contextApi/Authcontext';
 
 
 const Quizes = () => {
-    const {categoryObject, loading} = useContext(mycontext)
-    
-    const {categoryOptions} = categoryObject
-    console.log(categoryOptions);
-
+    const {categoryObject, loading} = useContext(mycontext);
+    const {categoryOptions} = categoryObject;
     if(loading){
         return <p>Loaddings..</p>
     }
