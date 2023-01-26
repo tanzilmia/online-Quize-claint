@@ -13,6 +13,7 @@ import UserHistory from "../AdminPanel/UserHistory";
 import QuizeSetting from "../AdminPanel/QuizeSetting";
 import Quizes from "../pages/Quizes";
 import PlayQuize from "../components/PlayQuize";
+import SingleUserHistory from "../AdminPanel/SingleUserHistory";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
         path: "/playQuize/:categoryName",
         element: <PrivetRouting> <PlayQuize/> </PrivetRouting>,
         loader : ({params})=> fetch(`http://localhost:5000/playQuize/${params.categoryName}`)
+      },
+      {
+        path: "/single-user-info/:email",
+        element: <PrivetRouting> <SingleUserHistory/> </PrivetRouting>,
+        loader : ({params})=> fetch(`http://localhost:5000/single-user-info/${params.email}`)
       },
       {
         path: "/login",

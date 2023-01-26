@@ -13,7 +13,7 @@ const UserHistory = () => {
 
     const deleteHistory = (id) =>{
         try{
-            fetch(`http://localhost:5000/delete-user?id=${id}`,{
+            fetch(`http://localhost:5000/delete-user-history?id=${id}`,{
                 method:"DELETE"
             })
             .then(res => res.json())
@@ -23,6 +23,16 @@ const UserHistory = () => {
         }catch(err){}
     }
 
+    const resetHistory = (id) =>{
+        try{
+         fetch(`http://localhost:5000/reset-user-history?id=${id}`,{
+            method:"PUT",
+         })
+         .then(res=> res.json())
+         .then(data => {refetch()})
+        
+        }catch(err) {}
+    }
     
     return (
         <div>
@@ -40,6 +50,7 @@ const UserHistory = () => {
         <th>rightAns</th>
         <th>wrongAns</th>
         <th>Action</th> 
+        <th>Action</th> 
       </tr>
     </thead>
     <tbody>
@@ -53,7 +64,8 @@ const UserHistory = () => {
             <th>{user.score}</th>
             <th>{user.rightAns}</th>
             <th>{user.wrongAns}</th>
-            <th> <button onClick={()=>deleteHistory(user._id)}>Clear History</button> </th>
+            <th> <button className='btn btn-sm' onClick={()=>deleteHistory(user._id)}>Delete</button></th>
+            <th> <button className='btn btn-sm' onClick={()=>resetHistory(user._id)}>Reset History</button></th>
            
             
           </tr>)

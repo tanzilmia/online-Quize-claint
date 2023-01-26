@@ -33,7 +33,6 @@ const AddQuize = () => {
             quizeOptions : [optionOne,optionTow,optionThree,optionFour],
             correctAnswer,
             categoryName
-
         }
         
         // post quize 
