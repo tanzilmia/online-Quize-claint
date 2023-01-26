@@ -23,7 +23,7 @@ const Navbar = () => {
     <ul>
       {
          user?.email ? <>
-         <li> <Link to = '/'> <span className='mr-4'> <CgProfile/> </span> My Profile</Link> </li>
+         <li> <Link to = '/profile'> <span className='mr-4'> <CgProfile/> </span> My Profile</Link> </li>
          </>
          :
          <>

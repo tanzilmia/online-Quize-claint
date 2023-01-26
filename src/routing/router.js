@@ -14,6 +14,7 @@ import QuizeSetting from "../AdminPanel/QuizeSetting";
 import Quizes from "../pages/Quizes";
 import PlayQuize from "../components/PlayQuize";
 import SingleUserHistory from "../AdminPanel/SingleUserHistory";
+import Myprofile from "../pages/Myprofile";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path:"/profile",
+        element : <PrivetRouting> <Myprofile/> </PrivetRouting>
       },
       {
         path: "/dashboard",
