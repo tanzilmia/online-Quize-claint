@@ -66,31 +66,31 @@ const AddQuize = () => {
    <div>
     <h2>Insert New Quize</h2>
 
-    <div className="w-8/12 mx-auto p-5 form">
-        <h2 className="text-center text-3xl font-bold">Insert New Quize</h2>
+    <div className="sm:w-full lg:w-8/12 md:w-8/12 mx-auto p-5 form">
+        <h2 className="text-center md:text-3xl lg:text-3xl sm:text-2xl mb-4 font-bold">Add New Quize With Category </h2>
         <form onSubmit={handleSubmit(handleAddQuize)} className="form_inside">
             <div className="title">
                 <input type="text"  {...register("title", {
                 required: "Name is Required",
-              })} placeholder="Add Quize Title" />
+              })} placeholder="Quize Title" />
             </div>
-            <div className="options grid grid-cols-2 gap-2 ">
-                <div className="option">
+            <div className="insert_Options grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-2 ">
+                <div className="single_option">
                 <input type="text"  {...register("optionOne", {
                 required: "Name is Required",
               })} placeholder="option 1" />
                 </div>
-                <div className="option">
+                <div className="single_option">
                 <input type="text"  {...register("optionTow", {
                 required: "Name is Required",
               })} placeholder="option 2" />
                 </div>
-                <div className="option">
+                <div className="single_option">
                 <input type="text"  {...register("optionThree", {
                 required: "Name is Required",
               })} placeholder="option 3" />
                 </div>
-                <div className="option">
+                <div className="single_option">
                 <input type="text"  {...register("optionFour", {
                 required: "Name is Required",
               })} placeholder="option 4" />
@@ -99,11 +99,11 @@ const AddQuize = () => {
                 
             </div>
            
-            <div className="grid grid-cols-2 gap-2 mt-5">
-            <div className="option">
+            <div className="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-2 mt-5">
+            <div className="single_option">
            <input type="text"  {...register("correctAnswer", {
                 required: "Name is Required",
-              })} placeholder="Inter Correct Anser" />
+              })} placeholder="Enter Correct Anser" />
            </div>
            
             <div className="select_categorys">

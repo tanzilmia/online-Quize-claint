@@ -15,19 +15,19 @@ const DashBoard = () => {
             
            <div className='grid sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-3 gap-4 dashboard_content'>
 
-           <div className="divone p-3">
+           <div className="divtwo p-3">
            <div className='flex justify-center'> <span className='text-5xl text-white'> <BiAddToQueue/> </span></div>
             <div className='text-center text-white'>
-            <h2 className='text-xl my-2'> Insert Quize </h2>
+            <h2 className='text-xl mb-3'> Insert Quize </h2>
             <Link className='px-5 py-1 rounded-sm' to = "/dashboard/addQuize"> Viste </Link>
             </div>
            </div>
 
-           <div className="divtwo p-3">
+           <div className="divone p-3">
             <div className='flex justify-center'><span className='text-5xl text-white flex'> <AiOutlineUsergroupAdd/> </span></div>
             
             <div className='text-center text-white'>
-            <h2 className='text-xl my-2'> User Info </h2>
+            <h2 className='text-xl mb-3'> User Info </h2>
             <Link className='px-5 py-1 rounded-sm' to = "/dashboard/userinfo"> Viste </Link>
             </div>
            </div>
@@ -35,7 +35,7 @@ const DashBoard = () => {
            <div className="divthree p-3">
             <div className='flex justify-center'><span className='text-5xl text-white'> <FaHistory/> </span></div>
             <div className='text-center text-white'>
-            <h2 className='text-xl my-2'> User History </h2>
+            <h2 className='text-xl mb-3'> User History </h2>
             <Link className='px-5 py-1 rounded-sm' to = "/dashboard/userHistory"> Viste </Link>
             </div>
            </div>
@@ -43,7 +43,7 @@ const DashBoard = () => {
            <div className="divfour p-3">
              <div className='flex justify-center'><span className='text-5xl text-white'> <AiFillSetting/> </span></div>
             <div className='text-center text-white'>
-            <h2 className='text-xl my-2'> Settings </h2>
+            <h2 className='text-xl mb-3'> Settings </h2>
             <Link className='px-5 py-1 rounded-sm' to = "/dashboard/settings"> Viste </Link>
             </div>
            </div>

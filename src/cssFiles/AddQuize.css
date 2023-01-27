@@ -1,5 +1,5 @@
 .form{
- border: 5px solid rgb(91, 233, 34);
+ border: 3px solid rgb(236, 246, 232);
  
 }
 
@@ -9,19 +9,22 @@
     font-size: 18px;
     text-align: center;
     color: blue;
+    margin-bottom: 10px;
+    outline: none;
     
 }
-.option{
+.single_option{
     background-color: none;
 }
 
-.option input{
+.single_option input{
     width: 100%;
     padding: 10px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #000;
     background-color: none;
+    outline: none;
 }
 .select_categorys select{
     width: 100%;
