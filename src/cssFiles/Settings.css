@@ -1,0 +1,14 @@
+.common_div{
+   border-radius: 5px;
+    padding: 15px;
+}
+.category_div{
+ background: linear-gradient(to right, #038CD0, #27C5D9);
+ 
+}
+.update_time{
+    background: linear-gradient(to right, #2CB8B9, #2EBABB);
+}
+.update_quizeLimit{
+    background: linear-gradient(to right, #815FEB, #888AC7); 
+}

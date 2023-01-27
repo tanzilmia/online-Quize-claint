@@ -1,17 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { MdCategory,MdOutlineAvTimer,MdTask } from 'react-icons/md';
 import '../cssFiles/Settings.css'
 const QuizeSetting = () => {
   const [updateSetting, setupdateSetting] = useState(false);
   const [updatedayliQuize, setupdatedayliQuize] = useState(false);
+  const [addCategoryState, setaddCategoryState] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-  const [quizeError, setquizeError] = useState("");
 
   const { data: settings = {}, refetch } = useQuery({
     queryKey: ["settings"],
@@ -95,10 +96,19 @@ const QuizeSetting = () => {
   };
 
   return (
-    <div>
+    <div className="grid grid-cols-3 gap-4 text-center">
       {/* add quize categories */}
-      <div>
-        <h2>Add New Categories</h2>
+      <div className="common_div category_div">
+       {  addCategoryState === false ?
+       <>
+        <div className="flex items-center text-white flex-col justify-center">
+          <span className="text-5xl mb-3"> <MdCategory/> </span>
+          <button onClick={()=>setaddCategoryState(true)} className="btn btn-primary btn-sm"> add Category</button>
+        </div>
+       </>
+       :
+        <>
+         <h2>Add New Categories</h2>
         <form onSubmit={handleSubmit(handleAddCategories)} action="">
           <div>
             <input
@@ -111,13 +121,19 @@ const QuizeSetting = () => {
           </div>
           <button type="submit">Add Categories</button>
         </form>
+        </>
+  
+       }
       </div>
 
-      <div>
+      <div className="common_div update_time">
         {updateSetting === false ? (
           <>
-            <h2>Cureenty time is {timer} </h2>
-            <button onClick={() => setupdateSetting(true)}>ChangeTime</button>
+          <div className="flex items-center text-white flex-col justify-center">
+            <div className="flex justify-center items-center text-2xl"> <span className="text-5xl mb-3"><MdOutlineAvTimer/></span> {timer}  </div>
+            <button className="btn btn-sm btn-info" onClick={() => setupdateSetting(true)}>Update time</button>
+          </div>
+            
           </>
         ) : (
           <>
@@ -132,11 +148,14 @@ const QuizeSetting = () => {
         )}
       </div>
 
-      <div>
+      <div className="common_div update_quizeLimit">
         {updatedayliQuize === false ? (
           <>
-            <h2>Daily {dayliQuize} Qize Limited</h2>
-            <button onClick={() => setupdatedayliQuize(true)}>update</button>
+          <div className="flex items-center text-white flex-col justify-center">
+          <div className="flex justify-center items-center text-2xl"> <span className="text-5xl mb-3"><MdTask/></span> {dayliQuize}  </div>
+            <button className="btn btn-sm btn-success" onClick={() => setupdatedayliQuize(true)}>update Quize limit</button>
+          </div>
+            
           </>
         ) : (
           <>
