@@ -37,6 +37,7 @@ const SingleUserHistory = () => {
                 <th>rightAns</th>
                 <th>wrongAns</th>
                 <th>Action</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -51,12 +52,12 @@ const SingleUserHistory = () => {
                     <th>{user.rightAns}</th>
                     <th>{user.wrongAns}</th>
                     <th>
-                      <button className="btn">Delete</button>
+                      <button className="btn btn-sm">Delete</button>
                     </th>
                     <th>
                       <button
                         onClick={() => handlereset(user._id)}
-                        className="btn"
+                        className="btn btn-sm"
                       >
                         Reset
                       </button>

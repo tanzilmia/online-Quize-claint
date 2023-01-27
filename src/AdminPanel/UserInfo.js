@@ -49,8 +49,8 @@ const UserInfo = () => {
             <th> {index + 1} </th>
             <th>{user.name}</th>
             <th>{user.email}</th>
-            <th> <Link to = {`/single-user-info/${user.email}`}>View Details</Link> </th>
-            <th><button disabled ={user.role === "admin"} onClick={()=>deleteUser(user._id)} className='btn'>Delete</button></th>
+            <th> <Link className='btn btn-sm' to = {`/single-user-info/${user.email}`}>View Details</Link> </th>
+            <th><button disabled ={user.role === "admin"} onClick={()=>deleteUser(user._id)} className='btn btn-sm'>Delete</button></th>
           </tr>)
     }
     </tbody>
