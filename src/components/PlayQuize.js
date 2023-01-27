@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { mycontext } from "../contextApi/Authcontext";
+import { MdOutlineAvTimer } from 'react-icons/md';
 import '../cssFiles/PlayQuize.css'
 const PlayQuize = () => {
   const {user,loading} = useContext(mycontext);
@@ -146,12 +147,23 @@ const PlayQuize = () => {
   return (
     <> { dbCurrentQuestion === dayliQuize ?
       <>
-      <h2 className="text-center text-2xl">You Finised ToDay Task </h2>
+     <div className="flex justify-center items-center h-[90vh]"> <h2 className="text-center text-2xl">You Finised ToDay Task </h2> </div>
     </>
       :
       <>
          <div className="w-6/12 mx-auto text-center mt-11">
-      <div>Remaining Time: {remainingTime} seconds</div>
+          
+          
+        <div className="flex justify-center items-center text-2xl"> {currentQuestion}/{dayliQuize} Quize Left </div>
+
+        <div className="flex justify-center items-center text-2xl">
+                {" "}
+                <span className="mr-2 text-success">
+                  <MdOutlineAvTimer />
+                </span>{" "}
+                <span className="text-primary">{remainingTime}s Left</span>
+              </div>
+
       <h2 className="text-xl text-center">{quizes[dbCurrentQuestion]?.title} </h2>
       <ul className="Option grid grid-cols-2 gap-2 mt-4">
         {quizes[dbCurrentQuestion]?.quizeOptions?.map((option, _id) => (

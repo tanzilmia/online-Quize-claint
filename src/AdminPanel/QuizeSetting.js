@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { MdCategory,MdOutlineAvTimer,MdTask } from 'react-icons/md';
-import '../cssFiles/Settings.css'
+import { MdCategory, MdOutlineAvTimer, MdTask } from "react-icons/md";
+import "../cssFiles/Settings.css";
 const QuizeSetting = () => {
   const [updateSetting, setupdateSetting] = useState(false);
   const [updatedayliQuize, setupdatedayliQuize] = useState(false);
@@ -99,50 +99,84 @@ const QuizeSetting = () => {
     <div className="grid grid-cols-3 gap-4 text-center">
       {/* add quize categories */}
       <div className="common_div category_div">
-       {  addCategoryState === false ?
-       <>
-        <div className="flex items-center text-white flex-col justify-center">
-          <span className="text-5xl mb-3"> <MdCategory/> </span>
-          <button onClick={()=>setaddCategoryState(true)} className="btn btn-primary btn-sm"> add Category</button>
-        </div>
-       </>
-       :
-        <>
-         <h4 className="text-xl text-white">Add New Categories</h4>
-        <form onSubmit={handleSubmit(handleAddCategories)} action="">
-          <div className="my-3">
-            <input className="p-2 rounded-lg"
-              type="text"
-              {...register("addCategoreys", {
-                required: "Name is Required",
-              })}
-              placeholder="Enter Your Category Name"
-            />
-          </div>
-          <button type="submit" className="btn btn-sm btn-primary mb-3">Add Categories</button>
-        </form>
-        </>
-  
-       }
+        {addCategoryState === false ? (
+          <>
+            <div className="flex items-center text-white flex-col justify-center">
+              <span className="text-5xl mb-3">
+                {" "}
+                <MdCategory />{" "}
+              </span>
+              <button
+                onClick={() => setaddCategoryState(true)}
+                className="btn btn-primary btn-sm"
+              >
+                {" "}
+                add Category
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <h4 className="text-xl text-white">Add New Categories</h4>
+            <form onSubmit={handleSubmit(handleAddCategories)} action="">
+              <div className="my-3">
+                <input
+                  className="p-2 rounded-lg"
+                  type="text"
+                  {...register("addCategoreys", {
+                    required: "Name is Required",
+                  })}
+                  placeholder="Enter Your Category Name"
+                />
+              </div>
+              <button type="submit" className="btn btn-sm btn-primary mb-3">
+                Add Categories
+              </button>
+            </form>
+          </>
+        )}
       </div>
 
       <div className="common_div update_time">
         {updateSetting === false ? (
           <>
-          <div className="flex items-center text-white flex-col justify-center">
-            <div className="flex justify-center items-center text-2xl"> <span className="text-5xl mb-3"><MdOutlineAvTimer/></span> {timer}  </div>
-            <button className="btn btn-sm btn-info" onClick={() => setupdateSetting(true)}>Update time</button>
-          </div>
-            
+            <div className="flex items-center text-white flex-col justify-center">
+              <div className="flex justify-center items-center text-2xl">
+                {" "}
+                <span className="text-5xl mb-3">
+                  <MdOutlineAvTimer />
+                </span>{" "}
+                {timer}{" "}
+              </div>
+              <button
+                className="btn btn-sm btn-info"
+                onClick={() => setupdateSetting(true)}
+              >
+                Update time
+              </button>
+            </div>
           </>
         ) : (
           <>
-             <div className="flex justify-center items-center text-white text-2xl">  <span className="text-5xl mb-3"><MdOutlineAvTimer/></span> {timer}  </div>
+            <div className="flex justify-center items-center text-white text-2xl">
+              {" "}
+              <span className="text-5xl mb-3">
+                <MdOutlineAvTimer />
+              </span>{" "}
+              {timer}{" "}
+            </div>
             <form onSubmit={timelimit}>
               <div className="my-3">
-                <input className="p-2 rounded-lg" type="number" defaultValue={timer} name="timer" />
+                <input
+                  className="p-2 rounded-lg"
+                  type="number"
+                  defaultValue={timer}
+                  name="timer"
+                />
               </div>
-              <button type="submit" className="btn btn-sm btn-primary">Add time</button>
+              <button type="submit" className="btn btn-sm btn-primary">
+                Add time
+              </button>
             </form>
           </>
         )}
@@ -151,25 +185,43 @@ const QuizeSetting = () => {
       <div className="common_div update_quizeLimit">
         {updatedayliQuize === false ? (
           <>
-          <div className="flex items-center text-white flex-col justify-center">
-          <div className="flex justify-center items-center text-2xl"> <span className="text-5xl mb-3"><MdTask/></span> {dayliQuize}  </div>
-            <button className="btn btn-sm btn-success" onClick={() => setupdatedayliQuize(true)}>update Quize limit</button>
-          </div>
-            
+            <div className="flex items-center text-white flex-col justify-center">
+              <div className="flex justify-center items-center text-2xl">
+                {" "}
+                <span className="text-5xl mb-3">
+                  <MdTask />
+                </span>{" "}
+                {dayliQuize}{" "}
+              </div>
+              <button
+                className="btn btn-sm btn-success"
+                onClick={() => setupdatedayliQuize(true)}
+              >
+                update Quize limit
+              </button>
+            </div>
           </>
         ) : (
           <>
-            <div className="flex text-white justify-center items-center text-2xl"> <span className="text-5xl mb-3"><MdTask/></span> {dayliQuize}  </div>
+            <div className="flex text-white justify-center items-center text-2xl">
+              {" "}
+              <span className="text-5xl mb-3">
+                <MdTask />
+              </span>{" "}
+              {dayliQuize}{" "}
+            </div>
             <form onSubmit={updatequizlimite}>
               <div className="my-3">
                 <input
-                className="p-2 rounded-lg"
+                  className="p-2 rounded-lg"
                   type="number"
                   defaultValue={dayliQuize}
                   name="dailyquize"
                 />
               </div>
-              <button type="submit" className="btn btn-sm btn-primary">update</button>
+              <button type="submit" className="btn btn-sm btn-primary">
+                update
+              </button>
             </form>
           </>
         )}
