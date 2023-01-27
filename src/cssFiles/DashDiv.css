@@ -1,41 +1,38 @@
 .divone{
-    background-color: #1B98F5;
-    height: 250px;
+    background: linear-gradient(to right, #2CB8B9, #2EBABB);
+   
+}
+.divone a{
+    background: rgb(68, 147, 250);
+   
 }
 .divtwo{
-    background-color: #02B290;
-    height: 250px;
-}
-.divthree{
-    background-color: #1c8d7398;
-    height: 250px;
-}
-.divfour{
-    background-color: #f0781098;
-    height: 250px;
-}
-
-.dashboard_wrapper div{
-    border-radius: 25px;
-}
-.title{
-    text-align: center;
-    font-size: 30px;
-    color: #fff;
-    margin-top: 80px;
-    margin-bottom: 20px;
-
-}
-.linktag{
-    text-decoration: none;
-    background: rgb(18, 179, 219);
-    padding: 10px 25px;
-    color: #fff;
-    margin-left: 160px;
-    font-size: 18px;
-    border-radius: 25px;
+    background: linear-gradient(to right, #038CD0, #27C5D9);
     
 }
+.divtwo a{
+    background: rgb(22, 231, 119);
+    
+}
+.divthree{
+    background: linear-gradient(to right, #815FEB, #888AC7);   
+}
+
+.divthree a{
+    background: rgb(100, 155, 244);
+    
+}
+
+.divfour{
+    background: linear-gradient(to right, #555E63, #585F65);
+}
+.divfour a{
+    background: rgb(100, 244, 184); 
+}
+.dashboard_content div{
+    border-radius: 10px;
+}
+
 .start_quize{
     text-decoration: none;
     background: rgb(18, 179, 219);

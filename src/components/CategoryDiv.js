@@ -1,10 +1,8 @@
 import moment from 'moment/moment';
-import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { mycontext } from '../contextApi/Authcontext';
-import '../cssFiles/DashDiv.css'
-
+import '../cssFiles/QuizeCategory.css'
 
 const CategoryDiv = ({category}) => {
     const {user} = useContext(mycontext);
@@ -14,7 +12,6 @@ const CategoryDiv = ({category}) => {
     const score = 0;
     const rightAns = 0;
     const wrongAns = 0;
-
     const userData = {
         email : user.email,
         name:user.name,
@@ -43,11 +40,9 @@ const CategoryDiv = ({category}) => {
     }
 
     return (
-        <div className='divtwo'>
-            <h2 className='title'>{categoryName}</h2>
-           
-
-         <Link onClick={handleStartQuize} className='start_quize' to = {`/playQuize/${categoryName}`}> Start Quize </Link>
+        <div className='quize_category text-center rounded-lg p-3'>
+            <h2 className='quize_title text-3xl my-3 text-white'>{categoryName}</h2>
+         <Link onClick={handleStartQuize} className='quize_btns px-4 py-1 rounded-md font-bold text-white' to = {`/playQuize/${categoryName}`}> Start Quize </Link>
             
         </div>
     );

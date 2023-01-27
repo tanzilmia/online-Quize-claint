@@ -108,10 +108,10 @@ const QuizeSetting = () => {
        </>
        :
         <>
-         <h2>Add New Categories</h2>
+         <h4 className="text-xl text-white">Add New Categories</h4>
         <form onSubmit={handleSubmit(handleAddCategories)} action="">
-          <div>
-            <input
+          <div className="my-3">
+            <input className="p-2 rounded-lg"
               type="text"
               {...register("addCategoreys", {
                 required: "Name is Required",
@@ -119,7 +119,7 @@ const QuizeSetting = () => {
               placeholder="Enter Your Category Name"
             />
           </div>
-          <button type="submit">Add Categories</button>
+          <button type="submit" className="btn btn-sm btn-primary mb-3">Add Categories</button>
         </form>
         </>
   
@@ -137,12 +137,12 @@ const QuizeSetting = () => {
           </>
         ) : (
           <>
-            <h2>Time Limit {timer} seconds </h2>
+             <div className="flex justify-center items-center text-white text-2xl">  <span className="text-5xl mb-3"><MdOutlineAvTimer/></span> {timer}  </div>
             <form onSubmit={timelimit}>
-              <div>
-                <input type="number" defaultValue={timer} name="timer" />
+              <div className="my-3">
+                <input className="p-2 rounded-lg" type="number" defaultValue={timer} name="timer" />
               </div>
-              <button type="submit">Add time</button>
+              <button type="submit" className="btn btn-sm btn-primary">Add time</button>
             </form>
           </>
         )}
@@ -159,16 +159,17 @@ const QuizeSetting = () => {
           </>
         ) : (
           <>
-            <h2>Quize Limit {dayliQuize} </h2>
+            <div className="flex text-white justify-center items-center text-2xl"> <span className="text-5xl mb-3"><MdTask/></span> {dayliQuize}  </div>
             <form onSubmit={updatequizlimite}>
-              <div>
+              <div className="my-3">
                 <input
+                className="p-2 rounded-lg"
                   type="number"
                   defaultValue={dayliQuize}
                   name="dailyquize"
                 />
               </div>
-              <button type="submit">update</button>
+              <button type="submit" className="btn btn-sm btn-primary">update</button>
             </form>
           </>
         )}
