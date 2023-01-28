@@ -142,7 +142,42 @@ const SingleUserHistory = () => {
           {" "}
           user All Time History{" "}
         </h2>
-        <div className="overflow-x-auto">
+
+        <div className="flex justify-center">
+          <table className="table-auto w-full text-center">
+            <thead class="bg-gray-200">
+              <tr className="sticky top-0 bg-gray-200">
+                <th className="px-4 py-2">Serial</th>
+                <th className="px-4 py-2">Date</th>
+                <th className="px-4 py-2">Category</th>
+                <th className="px-4 py-2">Score</th>
+                <th className="px-4 py-2">Right Answers</th>
+                <th className="px-4 py-2">Wrong Answers</th>
+                <th className="px-4 py-2">Total Answer</th>
+                <th className="px-4 py-2">AutoSubmit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userHistory.length &&
+                userHistory.map((user, index) => (
+                  <tr key={user._id} className="hover:bg-gray-100">
+                    <td className="border px-4 py-2">{index + 1}</td>
+                    <td className="border px-4 py-2">{user.date}</td>
+                    <td className="border px-4 py-2">{user.categoryName}</td>
+                    <td className="border px-4 py-2">{user.score}</td>
+                    <td className="border px-4 py-2">{user.rightAns}</td>
+                    <td className="border px-4 py-2">{user.wrongAns}</td>
+                    <td className="border px-4 py-2">{user.currentQuestion}</td>
+                    <td className="border px-4 py-2">
+                      {user.autoSubmitAnswer}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* <div className="overflow-x-auto">
           <table className="table w-full">
             <thead>
               <tr>
@@ -183,7 +218,7 @@ const SingleUserHistory = () => {
                 ))}
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
     </div>
   );

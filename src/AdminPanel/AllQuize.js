@@ -49,10 +49,10 @@ const AllQuize = () => {
       </table> */}
       <table className="table w-full table-responsive rounded-lg shadow-md">
         <thead className="bg-gray-200">
-          <tr>
+          <tr className="sticky top-0 bg-gray-200">
             <th className="text-center text-sm font-medium text-gray-800 p-2">Seriul</th>
             <th className="text-center text-sm font-medium text-gray-800 p-2">CategoryName</th>
-            <th className="text-center text-sm font-medium text-gray-800 p-2">TotalQuize</th>
+            <th className="text-center text-sm font-medium text-gray-800 p-2">Action</th>
           </tr>
         </thead>
         <tbody>

@@ -10,7 +10,7 @@ const CategoryWizeQuizeData = () => {
       <div className="w-full overflow-x-auto">
         <table className="table-auto text-xs">
           <thead>
-            <tr>
+            <tr className="sticky top-0 bg-gray-200">
               <th className="px-4 py-2 bg-slate-200 text-black">Serial</th>
               <th className="px-4 py-2 bg-slate-200 text-black">Title</th>
               <th className="px-4 py-2 bg-slate-200 text-black">Category Name</th>

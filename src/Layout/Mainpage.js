@@ -12,7 +12,6 @@ const Mainpage = () => {
             <div className='outlet w-10/12'>
             <Outlet></Outlet>
             </div>
-           
         </div>
     );
 };
