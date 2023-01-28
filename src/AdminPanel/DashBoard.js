@@ -47,6 +47,17 @@ const DashBoard = () => {
             <Link className='px-5 py-1 rounded-sm' to = "/dashboard/settings"> Viste </Link>
             </div>
            </div>
+
+            {/* quizes */}
+
+            <div className="divtwo p-3">
+           <div className='flex justify-center'> <span className='text-5xl text-white'> <BiAddToQueue/> </span></div>
+            <div className='text-center text-white'>
+            <h2 className='text-xl mb-3'> all Quize </h2>
+            <Link className='px-5 py-1 rounded-sm' to = "/dashboard/allQuize"> Viste </Link>
+            </div>
+           </div>
+
            </div>
         </div>
     );

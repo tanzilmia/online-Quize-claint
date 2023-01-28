@@ -15,6 +15,8 @@ import Quizes from "../pages/Quizes";
 import PlayQuize from "../components/PlayQuize";
 import SingleUserHistory from "../AdminPanel/SingleUserHistory";
 import Myprofile from "../pages/Myprofile";
+import AllQuize from "../AdminPanel/AllQuize";
+import CategoryWizeQuizeData from "../AdminPanel/CategoryWizeQuizeData";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +71,28 @@ const router = createBrowserRouter([
           </AdminRouting>
         ),
       },
+
+
+      {
+        path: "/dashboard/allQuize",
+        element: (
+          <AdminRouting>
+            <AllQuize/>
+          </AdminRouting>
+        ),
+      },
+      {
+        path: "/dashboard/allQuize/:categoryName",
+        element: (
+          <AdminRouting>
+            <CategoryWizeQuizeData/>
+          </AdminRouting>
+        ),
+        loader : ({params})=> fetch(`http://localhost:5000/playQuize/${params.categoryName}`)
+
+      },
+
+
       {
         path: "/dashboard/userinfo",
         element: (
