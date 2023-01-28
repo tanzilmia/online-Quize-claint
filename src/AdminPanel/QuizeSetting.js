@@ -2,11 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdCategory, MdOutlineAvTimer, MdTask } from "react-icons/md";
+import { FaPlus } from "react-icons/fa";
+import { AiOutlineMinus } from "react-icons/ai";
+import { BsSkipEnd } from "react-icons/bs";
 import "../cssFiles/Settings.css";
 const QuizeSetting = () => {
   const [updateSetting, setupdateSetting] = useState(false);
   const [updatedayliQuize, setupdatedayliQuize] = useState(false);
   const [addCategoryState, setaddCategoryState] = useState(false);
+  const [rightPoint, setrightPoint] = useState(false);
+  const [wrongpoint, setWrongpoint] = useState(false);
+  const [autosubmit, setautosubmitPoint] = useState(false);
   const {
     register,
     handleSubmit,
@@ -22,8 +28,8 @@ const QuizeSetting = () => {
       return data;
     },
   });
-  const [{ dayliQuize, timer }] = settings.data;
-
+  const [{ dayliQuize, timer,icressPoint,decressPoint,autosubmitPoint }] = settings.data;
+// time limit function
   const timelimit = (e) => {
     e.preventDefault();
     const newtime = e.target.timer.value;
@@ -43,6 +49,7 @@ const QuizeSetting = () => {
         }
       });
   };
+  // quize limite
   const updatequizlimite = (e) => {
     e.preventDefault();
     const newdailyquize = e.target.dailyquize.value;
@@ -63,6 +70,68 @@ const QuizeSetting = () => {
       });
   };
 
+  // update right point
+  const updaterightPoint = (e) => {
+    e.preventDefault();
+    const newrightPoint = e.target.rightPoint.value;
+    const UpdaterightPoint = parseInt(newrightPoint);
+    fetch(`http://localhost:5000/update-right-point`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ UpdaterightPoint }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "update complete") {
+          refetch();
+          setrightPoint(false);
+        }
+      });
+  };
+
+  // update wrong point
+  const updatewrongPoint = (e) => {
+    e.preventDefault();
+    const newrwrongPoint = e.target.wrongPoint.value;
+    const UpdatewrongPoint = parseInt(newrwrongPoint);
+    fetch(`http://localhost:5000/update-wrong-point`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ UpdatewrongPoint }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "update complete") {
+          refetch();
+          setWrongpoint(false);
+        }
+      });
+  };
+  // update autosubmit point
+
+  const updateautoPoint = (e) => {
+    e.preventDefault();
+    const newautosubmit = e.target.autosubmit.value;
+    const Updateautosubmit = parseInt(newautosubmit);
+    fetch(`http://localhost:5000/update-autosubmit-point`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ Updateautosubmit }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "update complete") {
+          refetch();
+          setautosubmitPoint(false);
+        }
+      });
+  };
   const handleAddCategories = (data) => {
     const categories = data.addCategoreys;
     console.log(categories);
@@ -96,7 +165,7 @@ const QuizeSetting = () => {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-4 text-center">
+    <div className="grid md:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 gap-4 text-center">
       {/* add quize categories */}
       <div className="common_div category_div">
         {addCategoryState === false ? (
@@ -152,7 +221,7 @@ const QuizeSetting = () => {
                 className="btn btn-sm btn-info"
                 onClick={() => setupdateSetting(true)}
               >
-                Update time
+                Quize time
               </button>
             </div>
           </>
@@ -197,7 +266,7 @@ const QuizeSetting = () => {
                 className="btn btn-sm btn-success"
                 onClick={() => setupdatedayliQuize(true)}
               >
-                update Quize limit
+                Quize limit
               </button>
             </div>
           </>
@@ -217,6 +286,144 @@ const QuizeSetting = () => {
                   type="number"
                   defaultValue={dayliQuize}
                   name="dailyquize"
+                />
+              </div>
+              <button type="submit" className="btn btn-sm btn-primary">
+                update
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+      {/* update right point */}
+
+      <div className="common_div update_rightAns">
+        {rightPoint === false ? (
+          <>
+            <div className="flex items-center text-white flex-col justify-center">
+              <div className="flex justify-center items-center text-2xl">
+                {" "}
+                <span className="text-5xl mb-3">
+                  <FaPlus />
+                </span>{" "}
+                {icressPoint}{" "}
+              </div>
+              <button
+                className="btn btn-sm btn-success"
+                onClick={() => setrightPoint(true)}
+              >
+                 Right Point
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex text-white justify-center items-center text-2xl">
+              {" "}
+              <span className="text-5xl mb-3">
+                <MdTask />
+              </span>{" "}
+              {icressPoint}{" "}
+            </div>
+            <form onSubmit={updaterightPoint}>
+              <div className="my-3">
+                <input
+                  className="p-2 rounded-lg"
+                  type="number"
+                  defaultValue={icressPoint}
+                  name="rightPoint"
+                />
+              </div>
+              <button type="submit" className="btn btn-sm btn-primary">
+                update
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+
+      {/* update wrong point */}
+      <div className="common_div update_quizeLimit">
+        {wrongpoint === false ? (
+          <>
+            <div className="flex items-center text-white flex-col justify-center">
+              <div className="flex justify-center items-center text-2xl">
+                {" "}
+                <span className="text-5xl mb-3">
+                  <AiOutlineMinus />
+                </span>{" "}
+                {decressPoint}{" "}
+              </div>
+              <button
+                className="btn btn-sm btn-success"
+                onClick={() => setWrongpoint(true)}
+              >
+                 wrong Point
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex text-white justify-center items-center text-2xl">
+              {" "}
+              <span className="text-5xl mb-3">
+                <MdTask />
+              </span>{" "}
+              {decressPoint}{" "}
+            </div>
+            <form onSubmit={updatewrongPoint}>
+              <div className="my-3">
+                <input
+                  className="p-2 rounded-lg"
+                  type="number"
+                  defaultValue={decressPoint}
+                  name="wrongPoint"
+                />
+              </div>
+              <button type="submit" className="btn btn-sm btn-primary">
+                update
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+
+      {/* update autosubmit point */}
+      <div className="common_div category_div">
+        {autosubmit === false ? (
+          <>
+            <div className="flex items-center text-white flex-col justify-center">
+              <div className="flex justify-center items-center text-2xl">
+                {" "}
+                <span className="text-5xl mb-3">
+                  <BsSkipEnd />
+                </span>{" "}
+                {autosubmitPoint}{" "}
+              </div>
+              <button
+                className="btn btn-sm btn-success"
+                onClick={() => setautosubmitPoint(true)}
+              >
+                 Auto Point
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex text-white justify-center items-center text-2xl">
+              {" "}
+              <span className="text-5xl mb-3">
+                <MdTask />
+              </span>{" "}
+              {autosubmitPoint}{" "}
+            </div>
+            <form onSubmit={updateautoPoint}>
+              <div className="my-3">
+                <input
+                  className="p-2 rounded-lg"
+                  type="number"
+                  defaultValue={autosubmitPoint}
+                  name="autosubmit"
                 />
               </div>
               <button type="submit" className="btn btn-sm btn-primary">

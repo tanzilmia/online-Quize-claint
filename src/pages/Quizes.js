@@ -14,7 +14,7 @@ const Quizes = () => {
     return (
         <div>
             <h2>All Quize Gose to here </h2>
-            <div className='grid grid-cols-3 gap-4'>
+            <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 gap-4'>
             {
                 categoryOptions?.length &&
 

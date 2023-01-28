@@ -1,6 +1,7 @@
 .common_div{
    border-radius: 10px;
     padding: 15px;
+    text-transform: capitalize;
 }
 .category_div{
  background: linear-gradient(to right, #038CD0, #27C5D9);
@@ -11,4 +12,7 @@
 }
 .update_quizeLimit{
     background: linear-gradient(to right, #815FEB, #888AC7); 
+}
+.update_rightAns{
+    background: linear-gradient(to right, #555E63, #585F65);
 }

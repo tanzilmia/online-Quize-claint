@@ -7,11 +7,12 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { mycontext } from "../contextApi/Authcontext";
 import { MdOutlineAvTimer } from 'react-icons/md';
 import '../cssFiles/PlayQuize.css'
+import { set } from "react-hook-form";
 const PlayQuize = () => {
   const {user,loading} = useContext(mycontext);
   const email = user?.email;
   const {settingsData} = useContext(mycontext);
-   const [{dayliQuize,timer}] = settingsData.settings;
+   const [{dayliQuize,timer,icressPoint,decressPoint,autosubmitPoint}] = settingsData.settings;
    const [dailyUserInfo, setdailyUserInfo] = useState({})
    const {currentQuestion:dbCurrentQuestion,score:databegScore,rightAns,wrongAns} = dailyUserInfo;
    const date = moment().format("MMM Do YY");
@@ -19,6 +20,7 @@ const PlayQuize = () => {
   const [wrong, setwrong] = useState(0);
   const [rigthAns, setrigthAns] = useState(0);
   const [score, setscore] = useState(0);
+  const [autosubmit, setautosubmit] = useState(0);
    
   const [currentQuestion, setcurrentQuestion] = useState(0);
 // dstructure quize general settings
@@ -37,7 +39,8 @@ const PlayQuize = () => {
               setRemainingTime(timer)
               setcurrentQuestion(currentQuestion + 1);
               setwrong(wrong+1)
-              setscore(score-2)
+              setautosubmit(autosubmit + 1)
+              setscore(score- autosubmitPoint)
               if(dbCurrentQuestion !==dayliQuize){
                 try{
                   fetch(
@@ -47,7 +50,7 @@ const PlayQuize = () => {
                       headers: {
                         "content-type": "application/json",
                       },
-                      body: JSON.stringify({wrong,score,categoryName,date,email,currentQuestion,dayliQuize}),
+                      body: JSON.stringify({wrong,score,categoryName,date,email,currentQuestion,dayliQuize,autosubmitPoint,autosubmit}),
                     }
                   )
                     .then((res) => res.json())
@@ -68,7 +71,7 @@ const PlayQuize = () => {
       return () => clearInterval(interval);
       }
      
-    }, [remainingTime,currentQuestion,timer,dayliQuize,wrong,score,categoryName,date,email,dbCurrentQuestion]);
+    }, [remainingTime,currentQuestion,timer,dayliQuize,wrong,score,categoryName,date,email,dbCurrentQuestion,autosubmitPoint,autosubmit]);
   }catch(err) {console.log(err)}
   
   // quize answer gettting
@@ -78,7 +81,7 @@ const PlayQuize = () => {
       setcurrentQuestion(currentQuestion + 1);
       setRemainingTime(timer)
       setrigthAns(rightAns + 1)
-      setscore(score + 10)
+      setscore(score + icressPoint)
       try{
         fetch(
           `http://localhost:5000/right-quize`,
@@ -87,7 +90,7 @@ const PlayQuize = () => {
             headers: {
               "content-type": "application/json",
             },
-            body: JSON.stringify({score,categoryName,date,email,currentQuestion,dayliQuize,rigthAns}),
+            body: JSON.stringify({score,categoryName,date,email,currentQuestion,dayliQuize,rigthAns,icressPoint}),
           }
         )
           .then((res) => res.json())
@@ -103,7 +106,7 @@ const PlayQuize = () => {
       setcurrentQuestion(currentQuestion + 1);
       setRemainingTime(timer)
       setwrong(wrong+1)
-      setscore(score - 10)
+      setscore(score - decressPoint)
       try{
         fetch(
           `http://localhost:5000/wrong-quize`,
@@ -112,7 +115,7 @@ const PlayQuize = () => {
             headers: {
               "content-type": "application/json",
             },
-            body: JSON.stringify({score,categoryName,date,email,currentQuestion,dayliQuize,wrong}),
+            body: JSON.stringify({score,categoryName,date,email,currentQuestion,dayliQuize,wrong,decressPoint}),
           }
         )
           .then((res) => res.json())

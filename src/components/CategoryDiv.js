@@ -12,6 +12,7 @@ const CategoryDiv = ({category}) => {
     const score = 0;
     const rightAns = 0;
     const wrongAns = 0;
+    const autoSubmitAnswer = 0;
     const userData = {
         email : user.email,
         name:user.name,
@@ -20,7 +21,8 @@ const CategoryDiv = ({category}) => {
         currentQuestion,
         score,
         rightAns,
-        wrongAns
+        wrongAns,
+        autoSubmitAnswer
     }
 
     const handleStartQuize = ()=>{
