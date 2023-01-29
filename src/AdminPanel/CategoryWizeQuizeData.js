@@ -1,19 +1,38 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 
+
 const CategoryWizeQuizeData = () => {
   const quizedata = useLoaderData();
 
   const handleEditeQuize = (id) =>{
     console.log(id);
   }
+  
+
+  const deleteQuize = (id) =>{
+    try {
+      fetch(`http://localhost:5000/delete-quize?id=${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if(data.message === "Successfully Deleted"){
+            setTimeout(() => {
+              window.location.reload(true);
+            }, 100);
+          }
+        });
+    } catch (err) {}
+  }
 
 
   return (
     <div>
-      <h2> Category Wize Quize Data </h2>
-      <div className="w-full overflow-x-auto">
-        <table className="table-auto text-xs">
+      {
+        quizedata?.data.length > 0 ?
+        <div className="flex justify-center">
+        <table className="table-auto w-full text-center text-xs">
           <thead>
             <tr className="sticky top-0 bg-gray-200">
               <th className="px-4 py-2 bg-slate-200 text-black">Serial</th>
@@ -24,6 +43,7 @@ const CategoryWizeQuizeData = () => {
               <th className="px-4 py-2 bg-slate-200 text-black">Option 2</th>
               <th className="px-4 py-2 bg-slate-200 text-black">Option 3</th>
               <th className="px-4 py-2 bg-slate-200 text-black">Option 4</th>
+              <th className="px-4 py-2 bg-slate-200 text-black">Action</th>
               <th className="px-4 py-2 bg-slate-200 text-black">Action</th>
             </tr>
           </thead>
@@ -38,12 +58,19 @@ const CategoryWizeQuizeData = () => {
                   {category.quizeOptions.map((option) => (
                     <td className="border px-4 py-2">{option}</td>
                   ))}
-                  <td className="border px-4 py-2"><Link to ={`/dashboard/editequize/${category._id}`} onClick={()=>handleEditeQuize(category._id)} className="btn btn-sm btn-warning">Edite</Link></td>
+                  <td className="border px-4 py-2"><Link to ={`/dashboard/editequize/${category._id}`} onClick={()=>handleEditeQuize(category._id)} className="btn btn-sm btn-primary">Edite</Link></td>
+                  <td> <button onClick={()=>deleteQuize(category._id)} className="btn btn-sm btn-warning"> Delete </button> </td>
                 </tr>
               ))}
           </tbody>
         </table>
       </div>
+        :
+        <div>
+          <h2>No Data Available</h2>
+        </div>
+      }
+      
     </div>
   );
 };
