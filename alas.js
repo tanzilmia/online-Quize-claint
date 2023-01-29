@@ -1,26 +1,8 @@
-let myArry = [
-    {name:"tanzil", date:"7-25-20"},
-    {name:"ab", date:"7-25-20"},
-    {name:"cd", date:"7-25-20"},
-    {name:"ef", date:"7-25-20"},
-    {name:"gh", date:"7-25-40"},
-    {name:"ig", date:"7-25-40"},
-    {name:"kl", date:"7-25-30"},
-    {name:"mn", date:"7-25-50"},
-    {name:"op", date:"7-25-30"},
-    {name:"qr", date:"7-25-10"},
-    {name:"st", date:"7-25-10"},
-]
+let myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-let dateCounts = myArry.reduce((counts, item) => {
-    if (!counts[item.date]) {
-      counts[item.date] = { date: item.date, count: 1 };
-    } else {
-      counts[item.date].count++;
-    }
-    return counts;
-  }, {});
-  
- 
-  let uniqueDates = Object.keys(dateCounts);
-  console.log(uniqueDates.length);
+// Shuffle the array using a random comparator function
+myArray.sort(() => Math.random() - 0.5);
+
+// Select the first 5 elements of the shuffled array
+let randomFive = myArray.slice(0, 5);
+console.log(randomFive)

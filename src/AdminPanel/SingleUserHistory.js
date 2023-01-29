@@ -149,6 +149,7 @@ const SingleUserHistory = () => {
               <tr className="sticky top-0 bg-gray-200">
                 <th className="px-4 py-2">Serial</th>
                 <th className="px-4 py-2">Date</th>
+                <th className="px-4 py-2">Name</th>
                 <th className="px-4 py-2">Category</th>
                 <th className="px-4 py-2">Score</th>
                 <th className="px-4 py-2">Right Answers</th>
@@ -163,6 +164,7 @@ const SingleUserHistory = () => {
                   <tr key={user._id} className="hover:bg-gray-100">
                     <td className="border px-4 py-2">{index + 1}</td>
                     <td className="border px-4 py-2">{user.date}</td>
+                    <td className="border px-4 py-2">{user.email}</td>
                     <td className="border px-4 py-2">{user.categoryName}</td>
                     <td className="border px-4 py-2">{user.score}</td>
                     <td className="border px-4 py-2">{user.rightAns}</td>

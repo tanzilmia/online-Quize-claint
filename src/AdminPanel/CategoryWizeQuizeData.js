@@ -3,7 +3,12 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const CategoryWizeQuizeData = () => {
   const quizedata = useLoaderData();
-  console.log(quizedata);
+
+  const handleEditeQuize = (id) =>{
+    console.log(id);
+  }
+
+
   return (
     <div>
       <h2> Category Wize Quize Data </h2>
@@ -33,7 +38,7 @@ const CategoryWizeQuizeData = () => {
                   {category.quizeOptions.map((option) => (
                     <td className="border px-4 py-2">{option}</td>
                   ))}
-                  <td className="border px-4 py-2"><Link className="btn btn-sm btn-warning">Edite</Link></td>
+                  <td className="border px-4 py-2"><Link to ={`/dashboard/editequize/${category._id}`} onClick={()=>handleEditeQuize(category._id)} className="btn btn-sm btn-warning">Edite</Link></td>
                 </tr>
               ))}
           </tbody>

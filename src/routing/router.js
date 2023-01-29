@@ -17,6 +17,8 @@ import SingleUserHistory from "../AdminPanel/SingleUserHistory";
 import Myprofile from "../pages/Myprofile";
 import AllQuize from "../AdminPanel/AllQuize";
 import CategoryWizeQuizeData from "../AdminPanel/CategoryWizeQuizeData";
+import EditeQuize from "../AdminPanel/EditeQuize";
+
 
 const router = createBrowserRouter([
   {
@@ -89,7 +91,16 @@ const router = createBrowserRouter([
           </AdminRouting>
         ),
         loader : ({params})=> fetch(`http://localhost:5000/playQuize/${params.categoryName}`)
+      },
 
+      {
+        path: "/dashboard/editequize/:id",
+        element: (
+          <AdminRouting>
+            <EditeQuize/>
+          </AdminRouting>
+        ),
+        loader : ({params})=> fetch(`http://localhost:5000/single-Quize/${params.id}`)
       },
 
 
