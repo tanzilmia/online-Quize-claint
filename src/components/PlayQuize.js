@@ -148,13 +148,13 @@ const PlayQuize = () => {
    }
 
   return (
-    <> { dbCurrentQuestion === dayliQuize ?
+    <div className="m-4"> { dbCurrentQuestion === dayliQuize ?  
       <>
      <div className="flex justify-center items-center h-[90vh]"> <h2 className="text-center text-2xl">You Finised ToDay Task </h2> </div>
     </>
       :
       <>
-         <div className="w-6/12 mx-auto text-center mt-11">
+         <div className="md:w-6/12 lg:w-6/12 w-10/12 mx-auto text-center mt-11">
           
           
         <div className="flex justify-center items-center text-2xl"> {currentQuestion}/{dayliQuize} Quize Left </div>
@@ -168,7 +168,7 @@ const PlayQuize = () => {
               </div>
 
       <h2 className="text-xl text-center">{quizes[dbCurrentQuestion]?.title} </h2>
-      <ul className="Option grid grid-cols-2 gap-2 mt-4">
+      <ul className="Option grid md:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-2 mt-4">
         {quizes[dbCurrentQuestion]?.quizeOptions?.map((option, _id) => (
           <>
             
@@ -191,7 +191,7 @@ const PlayQuize = () => {
      
     }
    
-    </>
+    </div>
   );
 };
 

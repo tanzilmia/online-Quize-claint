@@ -49,9 +49,9 @@ const Login = () => {
       });
   };
   return (
-    <div className="h-[800px] flex justify-center items-center">
-      <div className="w-96 p-7">
-        <h2 className="text-xl text-center">Login</h2>
+    <div className="h-full flex justify-center items-center">
+      <div className="w-96 md:mt-[150px] lg:mt-[150px] sm:mt-[50px] p-7 border-2 rounded-xl">
+        <h2 className="text-3xl text-center text-lime-500">Login Now</h2>
         <form onSubmit={handleSubmit(handlLogin)}>
           <div className="form-control w-full max-w-xs">
             <label className="label">
@@ -87,20 +87,20 @@ const Login = () => {
             />
             <label className="label">
               {" "}
-              <span className="label-text">Forget Password?</span>
+              
             </label>
             {errors.password && (
               <p className="text-red-600">{errors.password?.message}</p>
             )}
           </div>
-          <input className="btn btn-info w-full" value="Login" type="submit" />
+          <input className="btn btn-success text-white font-bold text-xl rounded-3xl w-full" value="Login" type="submit" />
           <div>
             {loginError && <p className="text-red-600">{loginError}</p>}
           </div>
         </form>
         <p>
           New to This Site ?{" "}
-          <Link className="text-secondary" to="/register">
+          <Link className="text-red-500 font-bold" to="/register">
             Create new Account
           </Link>
         </p>

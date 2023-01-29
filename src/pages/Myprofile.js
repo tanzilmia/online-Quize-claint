@@ -77,7 +77,7 @@ const Myprofile = () => {
   }
 
   return (
-    <div>
+    <div className="m-4">
       {/* user demo history */}
 
       <h2 className="text-center text-2xl font-bold">

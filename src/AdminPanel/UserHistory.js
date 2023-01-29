@@ -36,7 +36,7 @@ const UserHistory = () => {
   };
 
   return (
-    <div>
+    <div className="m-4">
       <h2 className="text-center text-2xl font-bold my-4">All User Info </h2>
       <div className="flex justify-center">
         <table className="table-auto w-full text-center text-sm">

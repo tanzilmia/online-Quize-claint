@@ -12,8 +12,8 @@ const Quizes = () => {
     }
    
     return (
-        <div>
-            <h2>All Quize Gose to here </h2>
+        <div className='m-4'>
+            <h2 className='text-center text-2xl my-4'> Chose Your Category </h2>
             <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 gap-4'>
             {
                 categoryOptions?.length &&

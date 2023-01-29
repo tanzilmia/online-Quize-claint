@@ -72,7 +72,7 @@ const SingleUserHistory = () => {
   };
 
   return (
-    <div>
+    <div className="m-4">
       <div>
         <div className="grid md:grid-cols-4 lg:grid-cols-4 sm:grid-cols-2 my-5 gap-4 text-center">
           <div className="common_div category_div">
@@ -144,12 +144,12 @@ const SingleUserHistory = () => {
         </h2>
 
         <div className="flex justify-center">
-          <table className="table-auto w-full text-center">
+          <table className="table-auto w-full text-center text-sm">
             <thead class="bg-gray-200">
               <tr className="sticky top-0 bg-gray-200">
                 <th className="px-4 py-2">Serial</th>
                 <th className="px-4 py-2">Date</th>
-                <th className="px-4 py-2">Name</th>
+                <th className="px-4 py-2">Email</th>
                 <th className="px-4 py-2">Category</th>
                 <th className="px-4 py-2">Score</th>
                 <th className="px-4 py-2">Right Answers</th>
