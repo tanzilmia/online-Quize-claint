@@ -23,7 +23,7 @@ const QuizeSetting = () => {
   const { data: settings = {}, refetch } = useQuery({
     queryKey: ["settings"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/settings`);
+      const res = await fetch(`https://online-quize-server.vercel.app/settings`);
       const data = await res.json();
       return data;
     },
@@ -34,7 +34,7 @@ const QuizeSetting = () => {
     e.preventDefault();
     const newtime = e.target.timer.value;
     const time = parseInt(newtime);
-    fetch(`http://localhost:5000/update-timer`, {
+    fetch(`https://online-quize-server.vercel.app/update-timer`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -54,7 +54,7 @@ const QuizeSetting = () => {
     e.preventDefault();
     const newdailyquize = e.target.dailyquize.value;
     const UpdateDailyQuize = parseInt(newdailyquize);
-    fetch(`http://localhost:5000/update-dailyQuze`, {
+    fetch(`https://online-quize-server.vercel.app/update-dailyQuze`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -75,7 +75,7 @@ const QuizeSetting = () => {
     e.preventDefault();
     const newrightPoint = e.target.rightPoint.value;
     const UpdaterightPoint = parseInt(newrightPoint);
-    fetch(`http://localhost:5000/update-right-point`, {
+    fetch(`https://online-quize-server.vercel.app/update-right-point`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -96,7 +96,7 @@ const QuizeSetting = () => {
     e.preventDefault();
     const newrwrongPoint = e.target.wrongPoint.value;
     const UpdatewrongPoint = parseInt(newrwrongPoint);
-    fetch(`http://localhost:5000/update-wrong-point`, {
+    fetch(`https://online-quize-server.vercel.app/update-wrong-point`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -117,7 +117,7 @@ const QuizeSetting = () => {
     e.preventDefault();
     const newautosubmit = e.target.autosubmit.value;
     const Updateautosubmit = parseInt(newautosubmit);
-    fetch(`http://localhost:5000/update-autosubmit-point`, {
+    fetch(`https://online-quize-server.vercel.app/update-autosubmit-point`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -141,7 +141,7 @@ const QuizeSetting = () => {
     };
 
     try {
-      fetch(`http://localhost:5000/addcategory`, {
+      fetch(`https://online-quize-server.vercel.app/addcategory`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -165,7 +165,7 @@ const QuizeSetting = () => {
   };
 
   return (
-    <div className="grid md:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 gap-4 text-center">
+    <div className="grid md:grid-cols-3 m-4 lg:grid-cols-3 sm:grid-cols-2 gap-4 text-center">
       {/* add quize categories */}
       <div className="common_div category_div">
         {addCategoryState === false ? (

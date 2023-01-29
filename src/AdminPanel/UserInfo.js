@@ -6,7 +6,7 @@ const UserInfo = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["all-user"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/all-user`);
+      const res = await fetch(`https://online-quize-server.vercel.app/all-user`);
       const data = await res.json();
       return data;
     },
@@ -14,7 +14,7 @@ const UserInfo = () => {
 
   const deleteUser = (id) => {
     try {
-      fetch(`http://localhost:5000/delete-user?id=${id}`, {
+      fetch(`https://online-quize-server.vercel.app/delete-user?id=${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

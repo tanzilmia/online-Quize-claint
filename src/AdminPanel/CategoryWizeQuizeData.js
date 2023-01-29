@@ -10,7 +10,7 @@ const CategoryWizeQuizeData = () => {
 
   const deleteQuize = (id) => {
     try {
-      fetch(`http://localhost:5000/delete-quize?id=${id}`, {
+      fetch(`https://online-quize-server.vercel.app/delete-quize?id=${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

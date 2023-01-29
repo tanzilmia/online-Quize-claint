@@ -13,7 +13,7 @@ const Authcontext = ({ children }) => {
   const {data:settings={}} = useQuery({
     queryKey:['settings'],
     queryFn : async ()=>{
-      const res = await fetch(`http://localhost:5000/settings`)
+      const res = await fetch(`https://online-quize-server.vercel.app/settings`)
       const data = await res.json()
       return data
     }
@@ -27,7 +27,7 @@ const Authcontext = ({ children }) => {
   const {data:categorys=[]} = useQuery({
     queryKey:["allCategorys"],
     queryFn: async ()=>{
-      const res = await fetch(`http://localhost:5000/allCategorys`)
+      const res = await fetch(`https://online-quize-server.vercel.app/allCategorys`)
       const data = await res.json()
       return data
 
@@ -43,7 +43,7 @@ const Authcontext = ({ children }) => {
   const token = localStorage.getItem("token");
   useEffect(() => {
     if(token || isLoggedIn){
-      fetch(`http://localhost:5000/userData`, {
+      fetch(`https://online-quize-server.vercel.app/userData`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

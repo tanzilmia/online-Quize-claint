@@ -21,7 +21,7 @@ const Myprofile = () => {
     queryKey: ["user-info", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/user-info?email=${user?.email}`
+        `https://online-quize-server.vercel.app/user-info?email=${user?.email}`
       );
       const data = await res.json();
       return data;

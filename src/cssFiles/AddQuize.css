@@ -11,6 +11,7 @@
     color: blue;
     margin-bottom: 10px;
     outline: none;
+    border: 2px solid rgba(57, 54, 54, 0.2);
     
 }
 .single_option{
@@ -21,10 +22,11 @@
     width: 100%;
     padding: 10px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 25px;
     color: #000;
     background-color: none;
     outline: none;
+    border: 2px solid rgba(57, 54, 54, 0.2);
 }
 .select_categorys select{
     width: 100%;

@@ -37,12 +37,12 @@ const router = createBrowserRouter([
       {
         path: "/playQuize/:categoryName",
         element: <PrivetRouting> <PlayQuize/> </PrivetRouting>,
-        loader : ({params})=> fetch(`http://localhost:5000/playQuize/${params.categoryName}`)
+        loader : ({params})=> fetch(`https://online-quize-server.vercel.app/playQuize/${params.categoryName}`)
       },
       {
         path: "/single-user-info/:email",
         element: <PrivetRouting> <SingleUserHistory/> </PrivetRouting>,
-        loader : ({params})=> fetch(`http://localhost:5000/single-user-info/${params.email}`)
+        loader : ({params})=> fetch(`https://online-quize-server.vercel.app/single-user-info/${params.email}`)
       },
       {
         path: "/login",
@@ -90,7 +90,7 @@ const router = createBrowserRouter([
             <CategoryWizeQuizeData/>
           </AdminRouting>
         ),
-        loader : ({params})=> fetch(`http://localhost:5000/playQuize/${params.categoryName}`)
+        loader : ({params})=> fetch(`https://online-quize-server.vercel.app/playQuize/${params.categoryName}`)
       },
 
       {
@@ -100,7 +100,7 @@ const router = createBrowserRouter([
             <EditeQuize/>
           </AdminRouting>
         ),
-        loader : ({params})=> fetch(`http://localhost:5000/single-Quize/${params.id}`)
+        loader : ({params})=> fetch(`https://online-quize-server.vercel.app/single-Quize/${params.id}`)
       },
 
 

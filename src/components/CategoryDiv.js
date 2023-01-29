@@ -28,7 +28,7 @@ const CategoryDiv = ({category}) => {
     const handleStartQuize = ()=>{
       try{
 
-        fetch(`http://localhost:5000/store-daily-quize`,{
+        fetch(`https://online-quize-server.vercel.app/store-daily-quize`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"

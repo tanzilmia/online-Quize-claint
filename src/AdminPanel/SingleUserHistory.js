@@ -63,7 +63,7 @@ const SingleUserHistory = () => {
 
   const handlereset = (id) => {
     try {
-      fetch(`http://localhost:5000/reset-user-history?id=${id}`, {
+      fetch(`https://online-quize-server.vercel.app/reset-user-history?id=${id}`, {
         method: "PUT",
       })
         .then((res) => res.json())

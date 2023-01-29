@@ -36,7 +36,7 @@ const EditeQuize = () => {
       id: _id,
     };
 
-    fetch(`http://localhost:5000/single-Quize-update`, {
+    fetch(`https://online-quize-server.vercel.app/single-Quize-update`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

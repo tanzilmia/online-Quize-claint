@@ -16,7 +16,7 @@ const Register = () => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
-    fetch(`http://localhost:5000/register`,{
+    fetch(`https://online-quize-server.vercel.app/register`,{
       method: 'POST',
       headers: {
         "content-type" : "application/json"

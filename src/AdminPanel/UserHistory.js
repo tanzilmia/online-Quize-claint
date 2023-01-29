@@ -5,7 +5,7 @@ const UserHistory = () => {
   const { data: userhistorys = [], refetch } = useQuery({
     queryKey: ["all-user-history"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/all-user-history`);
+      const res = await fetch(`https://online-quize-server.vercel.app/all-user-history`);
       const data = await res.json();
       return data;
     },
@@ -13,7 +13,7 @@ const UserHistory = () => {
 
   const deleteHistory = (id) => {
     try {
-      fetch(`http://localhost:5000/delete-user-history?id=${id}`, {
+      fetch(`https://online-quize-server.vercel.app/delete-user-history?id=${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -25,7 +25,7 @@ const UserHistory = () => {
 
   const resetHistory = (id) => {
     try {
-      fetch(`http://localhost:5000/reset-user-history?id=${id}`, {
+      fetch(`https://online-quize-server.vercel.app/reset-user-history?id=${id}`, {
         method: "PUT",
       })
         .then((res) => res.json())

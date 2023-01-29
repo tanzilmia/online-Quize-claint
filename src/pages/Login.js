@@ -20,7 +20,7 @@ const Login = () => {
     setLoginError("");
     const email = data.email;
     const password = data.password;
-    fetch(`http://localhost:5000/login`, {
+    fetch(`https://online-quize-server.vercel.app/login`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

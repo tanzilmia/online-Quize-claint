@@ -35,7 +35,7 @@ const AddQuize = () => {
     // post quize
 
     try {
-      fetch(`http://localhost:5000/insertquize`, {
+      fetch(`https://online-quize-server.vercel.app/insertquize`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

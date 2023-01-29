@@ -44,7 +44,7 @@ const PlayQuize = () => {
               if(dbCurrentQuestion !==dayliQuize){
                 try{
                   fetch(
-                    `http://localhost:5000/auto-submit-quize`,
+                    `https://online-quize-server.vercel.app/auto-submit-quize`,
                     {
                       method: "PUT",
                       headers: {
@@ -84,7 +84,7 @@ const PlayQuize = () => {
       setscore(score + icressPoint)
       try{
         fetch(
-          `http://localhost:5000/right-quize`,
+          `https://online-quize-server.vercel.app/right-quize`,
           {
             method: "PUT",
             headers: {
@@ -109,7 +109,7 @@ const PlayQuize = () => {
       setscore(score - decressPoint)
       try{
         fetch(
-          `http://localhost:5000/wrong-quize`,
+          `https://online-quize-server.vercel.app/wrong-quize`,
           {
             method: "PUT",
             headers: {
@@ -131,7 +131,7 @@ const PlayQuize = () => {
 
   if(currentQuestion <=dayliQuize){
     try{
-      fetch(`http://localhost:5000/store-daily-quize?email=${user?.email}&date=${date}&categoryName=${categoryName}`)
+      fetch(`https://online-quize-server.vercel.app/store-daily-quize?email=${user?.email}&date=${date}&categoryName=${categoryName}`)
       .then(res => res.json())
       .then(data => {
         setdailyUserInfo(data.data)

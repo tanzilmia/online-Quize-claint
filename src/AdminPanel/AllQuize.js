@@ -6,7 +6,7 @@ const AllQuize = () => {
   const { data: categories = [], refetch } = useQuery({
     queryKey: ["allCategorys"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/allCategorys`);
+      const res = await fetch(`https://online-quize-server.vercel.app/allCategorys`);
       const data = await res.json();
       return data;
     },
@@ -14,7 +14,7 @@ const AllQuize = () => {
 
   const handleDelet = (id) => {
     try {
-      fetch(`http://localhost:5000/delete-category?id=${id}`, {
+      fetch(`https://online-quize-server.vercel.app/delete-category?id=${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
