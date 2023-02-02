@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { mycontext } from "../contextApi/Authcontext";
 
@@ -46,6 +47,7 @@ const EditeQuize = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.message === "update complete") {
+          toast.success(`Successfully Edeted  `);
           naviget(`/dashboard/allQuize/${categoryName}`);
         }
       });

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const AllQuize = () => {
@@ -12,7 +13,7 @@ const AllQuize = () => {
     },
   });
 
-  const handleDelet = (id) => {
+  const handleDelet = (id,categoryName) => {
     try {
       fetch(`https://online-quize-server.vercel.app/delete-category?id=${id}`, {
         method: "DELETE",
@@ -20,6 +21,7 @@ const AllQuize = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.message === "Successfully Deleted") {
+            toast.success(`Successfully  ${categoryName} delete  `);
             refetch();
           }
         });
@@ -64,7 +66,7 @@ const AllQuize = () => {
                   </th>
                   <th className="border">
                     <button
-                      onClick={() => handleDelet(category._id)}
+                      onClick={() => handleDelet(category._id,category.categoryName)}
                       className="btn btn-sm btn-warning"
                     >
                       Delete

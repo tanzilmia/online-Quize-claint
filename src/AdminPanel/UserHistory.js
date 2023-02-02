@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 
 const UserHistory = () => {
   const { data: userhistorys = [], refetch } = useQuery({
@@ -11,26 +12,34 @@ const UserHistory = () => {
     },
   });
 
-  const deleteHistory = (id) => {
+  const deleteHistory = (id,categories) => {
     try {
       fetch(`https://online-quize-server.vercel.app/delete-user-history?id=${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
         .then((data) => {
+         if(data.message === "Successfully Deleted User History"){
+          toast.success(`Successfully delete ${categories} category `);
           refetch();
+         }
+          
         });
     } catch (err) {}
   };
 
-  const resetHistory = (id) => {
+  const resetHistory = (id,categories) => {
     try {
       fetch(`https://online-quize-server.vercel.app/reset-user-history?id=${id}`, {
         method: "PUT",
       })
         .then((res) => res.json())
         .then((data) => {
-          refetch();
+          if(data.message ==="update complete"){
+            toast.success(`Successfully reset ${categories} category `);
+            refetch();
+          }
+         
         });
     } catch (err) {}
   };
@@ -68,7 +77,7 @@ const UserHistory = () => {
                     {" "}
                     <button
                       className="btn btn-sm bg-red-500"
-                      onClick={() => deleteHistory(user._id)}
+                      onClick={() => deleteHistory(user._id,user.categoryName)}
                     >
                       Delete
                     </button>
@@ -77,7 +86,7 @@ const UserHistory = () => {
                     {" "}
                     <button
                       className="btn btn-sm"
-                      onClick={() => resetHistory(user._id)}
+                      onClick={() => resetHistory(user._id,user.categoryName)}
                     >
                       Reset History
                     </button>

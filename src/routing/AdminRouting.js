@@ -4,12 +4,12 @@ import { mycontext } from '../contextApi/Authcontext';
 
 const AdminRouting = ({children}) => {
     const {user,loading} = useContext(mycontext)
+    console.log(user);
     const location = useLocation();
-
     if(loading){
-        return <h2>Access Not Abailable</h2>
+        return <h2>Loadding...</h2>
     }
-    if (user.role === "admin"){
+    if (user?.role === "admin"){
         return children;
     }
 

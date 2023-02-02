@@ -49,7 +49,7 @@ const UserInfo = () => {
                     {" "}
                     <Link
                       className="btn btn-sm btn-primary rounded-2xl"
-                      to={`/single-user-info/${user.email}`}
+                      to={`/single-user-infos/${user._id}`}
                     >
                       View Details
                     </Link>{" "}

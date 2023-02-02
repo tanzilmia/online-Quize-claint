@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
 
 const CategoryWizeQuizeData = () => {
@@ -16,6 +17,7 @@ const CategoryWizeQuizeData = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.message === "Successfully Deleted") {
+            toast.success(`Successfully deleted `);
             setTimeout(() => {
               window.location.reload(true);
             }, 100);

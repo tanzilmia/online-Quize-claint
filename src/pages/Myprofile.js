@@ -85,9 +85,8 @@ const Myprofile = () => {
         Hello {user?.name} , it's your Quize Playing Histry
       </h2>
 
-      {userinfo.length > 0 ? (
-        <>
-          <div className="grid md:grid-cols-4 lg:grid-cols-4 sm:grid-cols-2 my-5 gap-4 text-center">
+
+      <div className="grid md:grid-cols-4 lg:grid-cols-4 sm:grid-cols-2 my-5 gap-4 text-center">
             <div className="common_div category_div">
               <div className="flex items-center text-white flex-col justify-center">
                 <span className="text-4xl">
@@ -151,32 +150,8 @@ const Myprofile = () => {
             </div>
           </div>
 
-          {/* <table className="table w-full">
-            <thead>
-              <tr>
-                <th>Seriul</th>
-                <th>Date</th>
-                <th>category</th>
-                <th>score</th>
-                <th>rightAns</th>
-                <th>wrongAns</th>
-              </tr>
-            </thead>
-            <tbody>
-              {userinfo.length &&
-                userinfo.map((user, index) => (
-                  <tr key={user._id}>
-                    <th> {index + 1} </th>
-                    <th>{user.date}</th>
-                    <th>{user.categoryName}</th>
-                    <th>{user.score}</th>
-                    <th>{user.rightAns}</th>
-                    <th>{user.wrongAns}</th>
-                  </tr>
-                ))}
-            </tbody>
-          </table> */}
-
+      {userinfo.length > 0 ? (
+        <>
           <div className="flex justify-center">
             <table className="table-auto w-full text-center">
               <thead class="bg-gray-200">
@@ -220,7 +195,7 @@ const Myprofile = () => {
               {" "}
               Currently You Don't Play Quize{" "}
             </h2>
-            <Link to="/quize"> Visite Quize </Link>
+            <Link to="/quize" className="btn btn-sm btn-primary rounded-2xl my-4"> Visite Quize </Link>
           </div>
         </>
       )}

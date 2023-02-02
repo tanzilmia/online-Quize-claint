@@ -6,6 +6,7 @@ import { FaPlus } from "react-icons/fa";
 import { AiOutlineMinus } from "react-icons/ai";
 import { BsSkipEnd } from "react-icons/bs";
 import "../cssFiles/Settings.css";
+import toast from "react-hot-toast";
 const QuizeSetting = () => {
   const [updateSetting, setupdateSetting] = useState(false);
   const [updatedayliQuize, setupdatedayliQuize] = useState(false);
@@ -132,12 +133,15 @@ const QuizeSetting = () => {
         }
       });
   };
+
+
   const handleAddCategories = (data) => {
     const categories = data.addCategoreys;
     console.log(categories);
 
     const categoryData = {
       categoryName: categories,
+      slug:false
     };
 
     try {
@@ -152,10 +156,11 @@ const QuizeSetting = () => {
         .then((data) => {
           console.log(data);
           if (data.message === "exist") {
-            alert("Quize is already exist");
+            
+            toast.error(` ${categories} Quize is already exist  `);
           }
           if (data.message === "successfull") {
-            alert("Quize add successfull");
+            toast.success(`Successfully  ${categories} category add  `);
             reset();
           }
         });

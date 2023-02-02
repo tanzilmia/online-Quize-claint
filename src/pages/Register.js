@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { mycontext } from "../contextApi/Authcontext";
 
 const Register = () => {
+  const {setloading} = useContext(mycontext)
   const {
     register,
     handleSubmit,
@@ -12,6 +16,7 @@ const Register = () => {
   const neviget = useNavigate();
 
   const handleSignup = (data) => {
+    setloading(true)
     setSignUPError("");
     const name = data.name;
     const email = data.email;
@@ -27,6 +32,7 @@ const Register = () => {
     .then(data => {
       console.log(data)
       if(data.message === "Successfully Registered"){
+        toast.success(`Successfull  `);
         neviget('/login')
       }
       

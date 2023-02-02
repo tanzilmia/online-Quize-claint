@@ -1,22 +1,21 @@
-
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { mycontext } from "../contextApi/Authcontext";
-
 const Login = () => {
-  const {setIsLoggedIn,} = useContext(mycontext)
+  const { setIsLoggedIn, setloading } = useContext(mycontext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const [loginError, setLoginError] = useState("");
+  const negivet = useNavigate();
   const location = useLocation();
-  const fromm = location.state?.from?.pathname || "/";
- const neviget = useNavigate()
+  const from = location.state?.from?.pathname || "/";
   const handlLogin = (data) => {
-    
+    setloading(true);
     setLoginError("");
     const email = data.email;
     const password = data.password;
@@ -29,22 +28,21 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        if(data.message === "Successfull"){
-            // storing the token
-            localStorage.setItem("token", data.data)
-            // neviget anywhere form here 
-            console.log(data);
-            setIsLoggedIn(true)
-            neviget(fromm, {replace:true})
-           
-
+        console.log(data);
+        if (data.message === "Successfull") {
+          // storing the token
+          localStorage.setItem("token", data.data);
+          // neviget anywhere form here
+          console.log(data);
+          setIsLoggedIn(true);
+          toast.success(`Successfull Login `);
+          negivet(from, { replace: true });
         }
-        if(data.message === "User not registered"){
-          setLoginError("worning User Not Register")
+        if (data.message === "User not registered") {
+          setLoginError("worning User Not Register");
         }
-        if(data.message === "Password didn't match"){
-          setLoginError("worning Password didn't match")
+        if (data.message === "Password didn't match") {
+          setLoginError("worning Password didn't match");
         }
       });
   };
@@ -85,15 +83,16 @@ const Login = () => {
               })}
               className="input input-bordered w-full max-w-xs"
             />
-            <label className="label">
-              {" "}
-              
-            </label>
+            <label className="label"> </label>
             {errors.password && (
               <p className="text-red-600">{errors.password?.message}</p>
             )}
           </div>
-          <input className="btn btn-success text-white font-bold text-xl rounded-3xl w-full" value="Login" type="submit" />
+          <input
+            className="btn btn-success text-white font-bold text-xl rounded-3xl w-full"
+            value="Login"
+            type="submit"
+          />
           <div>
             {loginError && <p className="text-red-600">{loginError}</p>}
           </div>

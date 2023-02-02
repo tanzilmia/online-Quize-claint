@@ -40,9 +40,9 @@ const router = createBrowserRouter([
         loader : ({params})=> fetch(`https://online-quize-server.vercel.app/playQuize/${params.categoryName}`)
       },
       {
-        path: "/single-user-info/:email",
-        element: <PrivetRouting> <SingleUserHistory/> </PrivetRouting>,
-        loader : ({params})=> fetch(`https://online-quize-server.vercel.app/single-user-info/${params.email}`)
+        path: "/single-user-infos/:id",
+        element: <AdminRouting> <SingleUserHistory/> </AdminRouting>,
+        loader : ({params})=> fetch(`https://online-quize-server.vercel.app/single-user-info/${params.id}`)
       },
       {
         path: "/login",

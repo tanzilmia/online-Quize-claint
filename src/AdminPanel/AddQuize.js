@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { mycontext } from "../contextApi/Authcontext";
 import "../cssFiles/AddQuize.css";
 const AddQuize = () => {
-  const { categoryObject } = useContext(mycontext);
+  const { categoryObject,loading } = useContext(mycontext);
   const [quizeError, setquizeError] = useState("");
   const {
     register,
@@ -39,6 +40,7 @@ const AddQuize = () => {
         method: "POST",
         headers: {
           "content-type": "application/json",
+          authorization : `Bearar ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(quizeData),
       })
@@ -49,7 +51,21 @@ const AddQuize = () => {
             alert("Quize is already exist");
           }
           if (data.message === "successfull") {
-            alert("Quize add successfull");
+            toast.success(`Successfully quize add on ${categoryName} category `);
+            try{
+
+              fetch(`https://online-quize-server.vercel.app/update-categorystatus?categoryName=${categoryName}`,{
+                method:"PUT",
+                headers: {
+                  "content-type":"application/json"
+                }
+              })
+              .then(res => res.json())
+              .then(data =>{
+                console.log(data)
+              })
+            }catch(err){}
+
             reset();
           }
         });
@@ -57,6 +73,10 @@ const AddQuize = () => {
       console.log(error);
     }
   };
+
+  if(loading){
+    return <p>Loadding...</p>
+  }
 
   return (
     <div className="m-4">
@@ -133,7 +153,7 @@ const AddQuize = () => {
                 })}
                 id=""
               >
-                {categoryOptions.length &&
+                {categoryOptions?.length &&
                   categoryOptions?.map((options) => (
                     <option value={options.categoryName}>
                       {options.categoryName}
