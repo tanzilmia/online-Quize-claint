@@ -68,9 +68,9 @@ const Authcontext = ({ children }) => {
     setIsRefreshed(true);
     setuser(null);
     setloading(true);
-    setTimeout(() => {
-      window.location.reload(true);
-    }, 100);
+    // setTimeout(() => {
+    //   window.location.reload(true);
+    // }, 100);
   };
 
   const contextValue = {

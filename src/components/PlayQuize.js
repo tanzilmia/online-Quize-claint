@@ -11,7 +11,7 @@ const PlayQuize = () => {
   const email = user?.email;
   const { settingsData } = useContext(mycontext);
   const [{ dayliQuize, timer, icressPoint, decressPoint, autosubmitPoint }] =
-    settingsData.settings;
+    settingsData?.settings;
   const [dailyUserInfo, setdailyUserInfo] = useState({});
   const {
     currentQuestion: dbCurrentQuestion,
@@ -192,7 +192,7 @@ const PlayQuize = () => {
       quizes?.length &&  quizes?.length > dayliQuize ?
       <div className="m-4">
       {" "}
-      {dbCurrentQuestion === dayliQuize ? (
+      {dbCurrentQuestion === dayliQuize  ? (
         <>
           <div className="flex justify-center items-center h-[90vh]">
             {" "}

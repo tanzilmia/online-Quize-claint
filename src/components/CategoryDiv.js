@@ -1,11 +1,12 @@
 import moment from 'moment/moment';
 import { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { mycontext } from '../contextApi/Authcontext';
 import '../cssFiles/QuizeCategory.css'
 
 const CategoryDiv = ({category}) => {
-    const {user} = useContext(mycontext);
+    const {user,loading} = useContext(mycontext);
     const {categoryName} = category;
     const date = moment().format("MMM Do YY");
     const currentQuestion = 0;
@@ -36,10 +37,19 @@ const CategoryDiv = ({category}) => {
             body: JSON.stringify(userData)
            })
            .then(res=> res.json())
-           .then(data => {console.log(data)})
+           .then(data => {
+            toast.error(data.message);
+           })
       }
       catch(err){console.log(err)}
     }
+
+
+
+  if(loading){
+    return <p>Loadding...</p>
+  }
+
 
     return (
         <div className='quize_category text-center rounded-lg p-3'>
