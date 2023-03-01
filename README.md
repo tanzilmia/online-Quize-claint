@@ -1,6 +1,11 @@
 ## Quize Buzz 
 https://online-quize-claint.vercel.app/
 
+## Admin Access :
+- Email :  admin@gmail.com
+- Password : 111111
+
+
 ### Details 
 This is my quiz playing app. If a user wants to take the quiz then he has to register first. Then he can take a limited number of quizzes in a day. He will not be able to give the quiz that he gave on today's date, he can take the quiz of that category again tomorrow.
 Admin can control quizzes, how many quizzes a user can take. And every user has a different profile. Where he can see his quiz playing history. Admin can control any user's quiz playing history. Admin can add or delete any quiz.
@@ -16,6 +21,3 @@ Admin can control quizzes, how many quizzes a user can take. And every user has 
 - Login System Using JWT. ( BackEnd)
 
 
-## Admin Access :
-- Email :  admin@gmail.com
-- Password : 111111
