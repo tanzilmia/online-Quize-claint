@@ -14,3 +14,8 @@ Admin can control quizzes, how many quizzes a user can take. And every user has 
 - Admin Can Change Quizes , Delete Quizes
 - Admin Can See All Users.
 - Login System Using JWT. ( BackEnd)
+
+
+## Admin Access :
+- Email :  admin@gmail.com
+- Password : 111111
